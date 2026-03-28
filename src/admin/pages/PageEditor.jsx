@@ -136,12 +136,15 @@ const PageEditor = () => {
                 placeholder="Enter hero title"
                 required
               />
-              <TextInput
-                label="Subtitle / Badge Text"
-                value={sectionData?.subtitle}
-                onChange={(val) => onChange('subtitle', val)}
-                placeholder="Enter subtitle or badge text"
-              />
+              {/* Hide Subtitle for Contact page Hero section */}
+              {!(pageId === 'contact' && sectionId === 'hero') && (
+                <TextInput
+                  label="Subtitle / Badge Text"
+                  value={sectionData?.subtitle}
+                  onChange={(val) => onChange('subtitle', val)}
+                  placeholder="Enter subtitle or badge text"
+                />
+              )}
             </div>
             <TextArea
               label="Description"
@@ -157,62 +160,68 @@ const PageEditor = () => {
               hint="Recommended size: 1920x1080px. Uploads to Cloudinary."
               folder="images"
             />
-            <div className="border-t pt-4">
-              <h4 className="font-medium mb-3">Trust Indicators</h4>
-              <p className="text-sm text-gray-500 mb-3">Display trust badges below the hero section</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <TextInput
-                  label="Avatar Count"
-                  type="number"
-                  value={sectionData?.trustIndicators?.avatarCount || 4}
-                  onChange={(val) => onChange('trustIndicators', {
-                    ...sectionData?.trustIndicators,
-                    avatarCount: parseInt(val) || 4
-                  })}
-                  placeholder="4"
-                  hint="Number of avatar circles to display"
-                />
-                <TextInput
-                  label="Trust Text"
-                  value={sectionData?.trustIndicators?.text || ''}
-                  onChange={(val) => onChange('trustIndicators', {
-                    ...sectionData?.trustIndicators,
-                    text: val
-                  })}
-                  placeholder="500+ Students Graduated"
-                  hint="Text displayed next to avatars"
-                />
+            {/* Hide Trust Indicators for About, Care-Ed, and Contact page Hero sections */}
+            {!((pageId === 'about' || pageId === 'care-ed' || pageId === 'contact') && sectionId === 'hero') && (
+              <div className="border-t pt-4">
+                <h4 className="font-medium mb-3">Trust Indicators</h4>
+                <p className="text-sm text-gray-500 mb-3">Display trust badges below the hero section</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <TextInput
+                    label="Avatar Count"
+                    type="number"
+                    value={sectionData?.trustIndicators?.avatarCount || 4}
+                    onChange={(val) => onChange('trustIndicators', {
+                      ...sectionData?.trustIndicators,
+                      avatarCount: parseInt(val) || 4
+                    })}
+                    placeholder="4"
+                    hint="Number of avatar circles to display"
+                  />
+                  <TextInput
+                    label="Trust Text"
+                    value={sectionData?.trustIndicators?.text || ''}
+                    onChange={(val) => onChange('trustIndicators', {
+                      ...sectionData?.trustIndicators,
+                      text: val
+                    })}
+                    placeholder="500+ Students Graduated"
+                    hint="Text displayed next to avatars"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="border-t pt-4">
-              <h4 className="font-medium mb-3">CTA Buttons</h4>
-              <div className="space-y-3">
-                <ButtonEditor
-                  label="Primary Button"
-                  value={sectionData?.buttons?.[0] || sectionData?.content?.ctaPrimary || { text: '', link: '', style: 'primary' }}
-                  onChange={(val) => {
-                    const currentButtons = sectionData?.buttons || [];
-                    const secondaryButton = currentButtons[1] || sectionData?.content?.ctaSecondary || { text: '', link: '', style: 'secondary' };
-                    const newButtons = [val, secondaryButton];
-                    // Save to both buttons array and content object for compatibility
-                    onChange('buttons', newButtons);
-                    onChange('content', { ...sectionData?.content, ctaPrimary: val, ctaSecondary: secondaryButton });
-                  }}
-                />
-                <ButtonEditor
-                  label="Secondary Button"
-                  value={sectionData?.buttons?.[1] || sectionData?.content?.ctaSecondary || { text: '', link: '', style: 'secondary' }}
-                  onChange={(val) => {
-                    const currentButtons = sectionData?.buttons || [];
-                    const primaryButton = currentButtons[0] || sectionData?.content?.ctaPrimary || { text: '', link: '', style: 'primary' };
-                    const newButtons = [primaryButton, val];
-                    // Save to both buttons array and content object for compatibility
-                    onChange('buttons', newButtons);
-                    onChange('content', { ...sectionData?.content, ctaPrimary: primaryButton, ctaSecondary: val });
-                  }}
-                />
+            )}
+            {/* Hide CTA Buttons for About, Care-Ed, and Contact page Hero sections */}
+            {!((pageId === 'about' || pageId === 'care-ed' || pageId === 'contact') && sectionId === 'hero') && (
+              <div className="border-t pt-4">
+                <h4 className="font-medium mb-3">CTA Buttons</h4>
+                <div className="space-y-3">
+                  <ButtonEditor
+                    label="Primary Button"
+                    value={sectionData?.buttons?.[0] || sectionData?.content?.ctaPrimary || { text: '', link: '', style: 'primary' }}
+                    onChange={(val) => {
+                      const currentButtons = sectionData?.buttons || [];
+                      const secondaryButton = currentButtons[1] || sectionData?.content?.ctaSecondary || { text: '', link: '', style: 'secondary' };
+                      const newButtons = [val, secondaryButton];
+                      // Save to both buttons array and content object for compatibility
+                      onChange('buttons', newButtons);
+                      onChange('content', { ...sectionData?.content, ctaPrimary: val, ctaSecondary: secondaryButton });
+                    }}
+                  />
+                  <ButtonEditor
+                    label="Secondary Button"
+                    value={sectionData?.buttons?.[1] || sectionData?.content?.ctaSecondary || { text: '', link: '', style: 'secondary' }}
+                    onChange={(val) => {
+                      const currentButtons = sectionData?.buttons || [];
+                      const primaryButton = currentButtons[0] || sectionData?.content?.ctaPrimary || { text: '', link: '', style: 'primary' };
+                      const newButtons = [primaryButton, val];
+                      // Save to both buttons array and content object for compatibility
+                      onChange('buttons', newButtons);
+                      onChange('content', { ...sectionData?.content, ctaPrimary: primaryButton, ctaSecondary: val });
+                    }}
+                  />
+                </div>
               </div>
-            </div>
+            )}
             <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
@@ -298,18 +307,21 @@ const PageEditor = () => {
                 onChange={(val) => onChange('subtitle', val)}
               />
             </div>
-            <TextArea
-              label="Description"
-              value={sectionData?.description}
-              onChange={(val) => onChange('description', val)}
-              rows={2}
-            />
+            {/* Hide Description for Care-Ed programs section */}
+            {!(pageId === 'care-ed' && sectionId === 'programs') && (
+              <TextArea
+                label="Description"
+                value={sectionData?.description}
+                onChange={(val) => onChange('description', val)}
+                rows={2}
+              />
+            )}
             <ArrayEditor
               label={sectionId === 'programs' ? 'Programs' : 'Features'}
               items={sectionData?.items}
               onChange={(val) => onChange('items', val)}
               addItemLabel={sectionId === 'programs' ? 'Add Program' : 'Add Feature'}
-              defaultItem={sectionId === 'programs' ? { id: '', title: 'New Program', description: '', icon: 'GraduationCap', duration: '', features: [], prerequisites: [] } : { title: 'New Feature', description: '', icon: 'Award', image: null }}
+              defaultItem={sectionId === 'programs' ? { id: '', title: 'New Program', description: '', icon: 'GraduationCap', link: '/care-ed', image: null, duration: '', features: [], prerequisites: [] } : { title: 'New Feature', description: '', icon: 'Award', image: null }}
               renderItem={(item, onUpdate, index) => (
                 <div className="space-y-3">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -357,6 +369,22 @@ const PageEditor = () => {
                             { value: 'Award', label: 'Award' },
                             { value: 'Briefcase', label: 'Briefcase' }
                           ]}
+                        />
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <TextInput
+                          label="Link URL"
+                          value={item?.link}
+                          onChange={(val) => onUpdate({ ...item, link: val })}
+                          placeholder="/care-ed"
+                          hint="URL for the Learn More button"
+                        />
+                        <ImageUpload
+                          label="Background Image"
+                          value={item?.image ? { url: item.image, publicId: item.imagePublicId } : null}
+                          onChange={(val) => onUpdate({ ...item, image: val?.url, imagePublicId: val?.publicId })}
+                          folder="programs"
+                          hint="Upload background image for program card"
                         />
                       </div>
                       <div className="border-t pt-3">
@@ -617,45 +645,51 @@ const PageEditor = () => {
                   }}
                 />
               </div>
-              <div className="border-t pt-4">
-                <h4 className="font-medium mb-3">Secondary Button</h4>
-                <p className="text-sm text-gray-500 mb-3">Optional - Second CTA button (e.g., phone number)</p>
-                <ButtonEditor
-                  label="Secondary Button"
-                  value={sectionData?.buttons?.[1] || { text: '', link: '', style: 'secondary' }}
-                  onChange={(val) => {
-                    const primaryButton = sectionData?.buttons?.[0] || { text: 'Contact Us', link: '/contact', style: 'primary' };
-                    onChange('buttons', [primaryButton, val]);
-                  }}
-                />
-              </div>
-              <div className="border-t pt-4">
-                <h4 className="font-medium mb-3">Contact Information</h4>
-                <p className="text-sm text-gray-500 mb-3">Optional - Display contact person information at the bottom of CTA</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <TextInput
-                    label="Contact Name"
-                    value={sectionData?.contactName || sectionData?.content?.contactName || ''}
+              {/* Hide Secondary Button for About page CTA section */}
+              {!(pageId === 'about') && (
+                <div className="border-t pt-4">
+                  <h4 className="font-medium mb-3">Secondary Button</h4>
+                  <p className="text-sm text-gray-500 mb-3">Optional - Second CTA button (e.g., phone number)</p>
+                  <ButtonEditor
+                    label="Secondary Button"
+                    value={sectionData?.buttons?.[1] || { text: '', link: '', style: 'secondary' }}
                     onChange={(val) => {
-                      onChange('contactName', val);
-                      onChange('content', { ...sectionData?.content, contactName: val });
+                      const primaryButton = sectionData?.buttons?.[0] || { text: 'Contact Us', link: '/contact', style: 'primary' };
+                      onChange('buttons', [primaryButton, val]);
                     }}
-                    placeholder="Heidi"
-                    hint="Name of contact person"
-                  />
-                  <TextInput
-                    label="Contact Email"
-                    type="email"
-                    value={sectionData?.contactEmail || sectionData?.content?.contactEmail || ''}
-                    onChange={(val) => {
-                      onChange('contactEmail', val);
-                      onChange('content', { ...sectionData?.content, contactEmail: val });
-                    }}
-                    placeholder="train@seniorwatch.com"
-                    hint="Email address for inquiries"
                   />
                 </div>
-              </div>
+              )}
+              {/* Hide Contact Information for About page CTA section */}
+              {!(pageId === 'about') && (
+                <div className="border-t pt-4">
+                  <h4 className="font-medium mb-3">Contact Information</h4>
+                  <p className="text-sm text-gray-500 mb-3">Optional - Display contact person information at the bottom of CTA</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <TextInput
+                      label="Contact Name"
+                      value={sectionData?.contactName || sectionData?.content?.contactName || ''}
+                      onChange={(val) => {
+                        onChange('contactName', val);
+                        onChange('content', { ...sectionData?.content, contactName: val });
+                      }}
+                      placeholder="Heidi"
+                      hint="Name of contact person"
+                    />
+                    <TextInput
+                      label="Contact Email"
+                      type="email"
+                      value={sectionData?.contactEmail || sectionData?.content?.contactEmail || ''}
+                      onChange={(val) => {
+                        onChange('contactEmail', val);
+                        onChange('content', { ...sectionData?.content, contactEmail: val });
+                      }}
+                      placeholder="train@seniorwatch.com"
+                      hint="Email address for inquiries"
+                    />
+                  </div>
+                </div>
+              )}
               <Toggle
                 label="Active"
                 checked={sectionData?.isActive !== false}
@@ -1567,12 +1601,15 @@ const PageEditor = () => {
       case 'info':
         return (
           <div className="space-y-6">
-            <TextInput
-              label="Section Title"
-              value={sectionData?.title}
-              onChange={(val) => onChange('title', val)}
-              placeholder="Contact Information"
-            />
+            {/* Hide Section Title for Contact page info section */}
+            {!(pageId === 'contact' && sectionId === 'info') && (
+              <TextInput
+                label="Section Title"
+                value={sectionData?.title}
+                onChange={(val) => onChange('title', val)}
+                placeholder="Contact Information"
+              />
+            )}
             <ArrayEditor
               label="Contact Items"
               items={sectionData?.items}
