@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin, Facebook, Linkedin, Instagram, Twitter, Youtube } from 'lucide-react'
 import logoLightStatic from '../assets/images/logo_light.png'
 import useGlobalData from '../hooks/useGlobalData'
+import { getGmailLink } from '../utils/email'
 
 // Icon mapping for social platforms
 const socialIconMap = {
@@ -151,13 +152,24 @@ function Footer() {
                   <span className="text-sm">{contactInfo?.phone || staticFooterData.contactInfo.phone}</span>
                 </a>
               </li>
+
               <li>
                 <a
-                  href={`mailto:${contactInfo?.email || staticFooterData.contactInfo.email}`}
+                  href={
+                    (contactInfo?.email || staticFooterData.contactInfo.email)
+                      ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+                        contactInfo?.email || staticFooterData.contactInfo.email
+                      )}`
+                      : "#"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-3 text-gray-300 hover:text-secondary-light transition-colors"
                 >
                   <Mail size={16} className="text-secondary-light flex-shrink-0" />
-                  <span className="text-sm">{contactInfo?.email || staticFooterData.contactInfo.email}</span>
+                  <span className="text-sm">
+                    {contactInfo?.email || staticFooterData.contactInfo.email}
+                  </span>
                 </a>
               </li>
             </ul>
@@ -173,18 +185,18 @@ function Footer() {
               {copyrightText}
             </p>
             <div className="flex gap-6 text-sm">
-              <a
-                href={footer.privacyLink || '/privacy'}
+              <Link
+                to="/privacy-policy"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 Privacy Policy
-              </a>
-              <a
-                href={footer.termsLink || '/terms'}
+              </Link>
+              <Link
+                to="/terms-of-service"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 Terms of Service
-              </a>
+              </Link>
             </div>
           </div>
         </div>

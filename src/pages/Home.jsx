@@ -362,7 +362,10 @@ function Home() {
               <span className="inline-block bg-secondary/20 text-secondary-light px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium mb-3 md:mb-4">
                 About Us
               </span>
-              <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4 md:mb-6">
+              {/* <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold mb-4 md:mb-6">
+                {aboutSection?.title || "Professional Healthcare Education & Training"}
+              </h2> */}
+              <h2 className="text-2xl md:text-3xl lg:text-[43px] font-bold mb-4 md:mb-6 ">
                 {aboutSection?.title || "Professional Healthcare Education & Training"}
               </h2>
               <p className="text-base md:text-lg lg:text-xl text-gray-200 mb-4 md:mb-6 leading-relaxed">
@@ -404,53 +407,83 @@ function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-10 md:py-20 lg:py-24 bg-white">
-        <div className="container-custom">
-          <AnimatedSection animation="fade-up">
-            <div className="text-center mb-8 md:mb-12 lg:mb-16">
-              <span className="inline-block bg-secondary/10 text-secondary px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium mb-3 md:mb-4">
-                Testimonials
-              </span>
-              <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-primary mb-3 md:mb-4">
-                {testimonialsSection?.title || "What Our Students Say"}
-              </h2>
-              <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-                {testimonialsSection?.description || "Hear from our graduates who have successfully started their healthcare careers."}
-              </p>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection animation="fade-up" stagger>
-            <div className="grid md:grid-cols-3 gap-4 md:gap-8">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="bg-gradient-to-br from-gray-50 to-white rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-lg border border-gray-100 relative"
-                >
-                  <div className="absolute top-4 md:top-6 left-6 md:left-8 text-4xl md:text-6xl text-secondary/20 font-serif">
-                    "
-                  </div>
-                  <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-6 relative z-10 pt-6 md:pt-8">
-                    {testimonial.quote}
-                  </p>
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center text-white font-bold text-sm md:text-base">
-                      {testimonial.author?.charAt(0) || 'A'}
+      {testimonialsSection?.isActive !== false && (
+        <section className="py-10 md:py-20 lg:py-24 bg-white">
+          <div className="container-custom">
+            <AnimatedSection animation="fade-up">
+              <div className="text-center mb-8 md:mb-12 lg:mb-16">
+                <span className="inline-block bg-secondary/10 text-secondary px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium mb-3 md:mb-4">
+                  Testimonials
+                </span>
+                <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-primary mb-3 md:mb-4">
+                  {testimonialsSection?.title || "What Our Students Say"}
+                </h2>
+                <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+                  {testimonialsSection?.description || "Hear from our graduates who have successfully started their healthcare careers."}
+                </p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection animation="fade-up" stagger>
+              {/* <div className="grid md:grid-cols-3 gap-4 md:gap-8">
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="bg-gradient-to-br from-gray-50 to-white rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-lg border border-gray-100 relative"
+                  >
+                    <div className="absolute top-4 md:top-6 left-6 md:left-8 text-4xl md:text-6xl text-secondary/20 font-serif">
+                      "
                     </div>
-                    <div>
-                      <div className="font-semibold text-primary text-sm md:text-base">
-                        {testimonial.author}
+                    <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-6 relative z-10 pt-6 md:pt-8">
+                      {testimonial.quote}
+                    </p>
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center text-white font-bold text-sm md:text-base">
+                        {testimonial.author?.charAt(0) || 'A'}
                       </div>
-                      <div className="text-xs md:text-sm text-gray-500">
-                        {testimonial.role}
+                      <div>
+                        <div className="font-semibold text-primary text-sm md:text-base">
+                          {testimonial.author}
+                        </div>
+                        <div className="text-xs md:text-sm text-gray-500">
+                          {testimonial.role}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+                ))}
+              </div> */}
+              <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={index}
+                    className="bg-gradient-to-br from-gray-50 to-white rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-lg border border-gray-100 relative flex flex-col h-full min-h-[220px] md:min-h-[260px]"
+                  >
+                    <div className="absolute top-4 md:top-6 left-6 md:left-8 text-4xl md:text-6xl text-secondary/20 font-serif">
+                      "
+                    </div>
+                    <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4 md:mb-6 relative z-10 pt-6 md:pt-8 flex-1">
+                      {testimonial.quote}
+                    </p>
+                    <div className="flex items-center gap-3 md:gap-4 mt-auto">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center text-white font-bold text-sm md:text-base flex-shrink-0">
+                        {testimonial.author?.charAt(0) || 'A'}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-primary text-sm md:text-base">
+                          {testimonial.author}
+                        </div>
+                        <div className="text-xs md:text-sm text-gray-500">
+                          {testimonial.role}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-10 md:py-20 lg:py-24 bg-gradient-to-br from-secondary to-secondary-dark text-white relative overflow-hidden">

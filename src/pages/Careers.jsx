@@ -16,6 +16,7 @@ import join from "../assets/images/joinus.avif";
 import AnimatedSection from "../components/AnimatedSection";
 import { usePageData } from "../hooks/usePageData";
 import { careersStaticData } from "../data/staticData";
+import { getGmailLink } from "../utils/email";
 
 function Careers() {
   const { data: pageData } = usePageData('careers');
@@ -374,7 +375,7 @@ function Careers() {
                         Send resume and cover letter to:
                       </p>
                       <a
-                        href="mailto:train@seniorwatch.com"
+                        href={getGmailLink("train@seniorwatch.com")}
                         className="text-secondary hover:underline"
                       >
                         train@seniorwatch.com

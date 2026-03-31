@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { pagesAPI } from '../services/api';
 import { contactStaticData } from '../data/staticData';
 import { cleanImages } from '../utils/imageUtils';
+import { processLink } from '../utils/email';
 
 // Icon mapping for dynamic icons
 import {
@@ -186,7 +187,8 @@ const processInfoSection = (apiInfo, staticInfo) => {
       label: ensureString(item.label) ?? staticInfo.items[index]?.label ?? '',
       value: ensureString(item.value) ?? staticInfo.items[index]?.value ?? '',
       icon: item.icon || staticInfo.items[index]?.icon,
-      link: item.link || staticInfo.items[index]?.link || '#',
+      // Convert mailto: links to Gmail links
+      link: processLink(item.link, item.value) || staticInfo.items[index]?.link || '#',
     })),
     isActive: apiInfo.isActive ?? staticInfo.isActive,
     order: apiInfo.order ?? staticInfo.order,
@@ -250,7 +252,8 @@ const processQuickContactSection = (apiQuickContact, staticQuickContact) => {
       title: ensureString(item.title) ?? staticQuickContact.items[index]?.title ?? '',
       subtitle: ensureString(item.subtitle) ?? staticQuickContact.items[index]?.subtitle ?? '',
       value: ensureString(item.value) ?? staticQuickContact.items[index]?.value ?? '',
-      link: item.link || staticQuickContact.items[index]?.link || '#',
+      // Convert mailto: links to Gmail links
+      link: processLink(item.link, item.value) || staticQuickContact.items[index]?.link || '#',
     })),
     isActive: apiQuickContact.isActive ?? staticQuickContact.isActive,
     order: apiQuickContact.order ?? staticQuickContact.order,

@@ -77,21 +77,21 @@ export const useHomeData = (options = {}) => {
       if (response.success && response.data) {
         // Transform sections array into object keyed by sectionId
         // IMPORTANT: Keep the FIRST occurrence of each section (in case of duplicates)
+        // Note: We include ALL sections regardless of isActive status, so the frontend
+        // can conditionally render based on isActive flag
         const sectionsMap = {};
         response.data.sections?.forEach(section => {
-          if (section.isActive !== false) {
-            // Only add if not already present (keep first occurrence)
-            if (!sectionsMap[section.sectionId]) {
-              sectionsMap[section.sectionId] = section;
-            } else {
-              // Merge buttons from duplicate if original has empty buttons
-              if (section.buttons?.length > 0 && !sectionsMap[section.sectionId].buttons?.length) {
-                sectionsMap[section.sectionId].buttons = section.buttons;
-              }
-              // Merge content from duplicate if original doesn't have it
-              if (section.content && !sectionsMap[section.sectionId].content) {
-                sectionsMap[section.sectionId].content = section.content;
-              }
+          // Only add if not already present (keep first occurrence)
+          if (!sectionsMap[section.sectionId]) {
+            sectionsMap[section.sectionId] = section;
+          } else {
+            // Merge buttons from duplicate if original has empty buttons
+            if (section.buttons?.length > 0 && !sectionsMap[section.sectionId].buttons?.length) {
+              sectionsMap[section.sectionId].buttons = section.buttons;
+            }
+            // Merge content from duplicate if original doesn't have it
+            if (section.content && !sectionsMap[section.sectionId].content) {
+              sectionsMap[section.sectionId].content = section.content;
             }
           }
         });

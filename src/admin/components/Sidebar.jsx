@@ -14,7 +14,9 @@ import {
   GraduationCap,
   Mail,
   ChevronRight,
-  Layout
+  Layout,
+  Shield,
+  Scroll
 } from 'lucide-react';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -82,6 +84,23 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       label: 'Contact Page',
       icon: Mail,
       path: '/admin/pages/contact'
+    },
+    {
+      id: 'divider-legal',
+      label: 'LEGAL',
+      isDivider: true
+    },
+    {
+      id: 'privacy-policy',
+      label: 'Privacy Policy',
+      icon: Shield,
+      path: '/admin/pages/legal/privacy-policy'
+    },
+    {
+      id: 'terms-of-service',
+      label: 'Terms of Service',
+      icon: Scroll,
+      path: '/admin/pages/legal/terms-of-service'
     },
     {
       id: 'divider2',
@@ -153,7 +172,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         </div>
 
         {/* Navigation - Scrollable */}
-        <nav className="flex-1 overflow-y-auto py-2 px-2">
+        {/* <nav className="flex-1 overflow-y-auto py-2 px-2"> */}
+        <nav className="flex-1 overflow-y-auto py-2 px-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <ul className="space-y-0.5">
             {menuItems.map((item) => (
               <li key={item.id}>

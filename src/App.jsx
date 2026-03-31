@@ -13,6 +13,7 @@ import ServiceDetail from './pages/ServiceDetail'
 import CareEd from './pages/CareEd'
 import Careers from './pages/Careers'
 import Contact from './pages/Contact'
+import { PrivacyPolicy, TermsOfService } from './pages/LegalPages'
 
 // Admin pages
 import AdminLogin from './admin/AdminLogin'
@@ -22,6 +23,7 @@ import PageEditor from './admin/pages/PageEditor'
 import ContactsPage from './admin/pages/ContactsPage'
 import MediaLibrary from './admin/pages/MediaLibrary'
 import GlobalSettings from './admin/pages/GlobalSettings'
+import LegalPageEditor from './admin/pages/LegalPageEditor'
 
 // Component to update favicon dynamically
 const FaviconUpdater = () => {
@@ -59,6 +61,8 @@ function App() {
             <Route path="care-ed" element={<CareEd />} />
             <Route path="careers" element={<Careers />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="terms-of-service" element={<TermsOfService />} />
           </Route>
 
           {/* Admin login route */}
@@ -68,6 +72,7 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="pages/:pageId" element={<PageEditor />} />
+            <Route path="pages/legal/:pageType" element={<LegalPageEditor />} />
             <Route path="settings" element={<GlobalSettings />} />
             <Route path="media" element={<MediaLibrary />} />
             <Route path="contacts" element={<ContactsPage />} />

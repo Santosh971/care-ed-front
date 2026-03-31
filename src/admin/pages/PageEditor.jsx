@@ -94,7 +94,7 @@ const pageConfig = {
 
 const PageEditor = () => {
   const { pageId } = useParams();
-  const { data, loading, error, fromApi, refetch } = usePageData(pageId);
+  const { data, loading, error, fromApi, refetch } = usePageData(pageId, { includeInactive: true });
   const { updateSection, loading: saving } = useUpdateSection();
   const [activeSection, setActiveSection] = useState(null);
   const [saveStatus, setSaveStatus] = useState({ type: '', message: '' });
@@ -295,20 +295,23 @@ const PageEditor = () => {
       case 'programs':
         return (
           <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <TextInput
-                label="Section Title"
-                value={sectionData?.title}
-                onChange={(val) => onChange('title', val)}
-              />
-              <TextInput
-                label="Subtitle"
-                value={sectionData?.subtitle}
-                onChange={(val) => onChange('subtitle', val)}
-              />
-            </div>
-            {/* Hide Description for Care-Ed programs section */}
-            {!(pageId === 'care-ed' && sectionId === 'programs') && (
+            {/* Hide Section Title and Subtitle for Features section (Home page) */}
+            {!(sectionId === 'features') && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <TextInput
+                  label="Section Title"
+                  value={sectionData?.title}
+                  onChange={(val) => onChange('title', val)}
+                />
+                <TextInput
+                  label="Subtitle"
+                  value={sectionData?.subtitle}
+                  onChange={(val) => onChange('subtitle', val)}
+                />
+              </div>
+            )}
+            {/* Hide Description for Features section and Care-Ed programs section */}
+            {!(sectionId === 'features') && !(pageId === 'care-ed' && sectionId === 'programs') && (
               <TextArea
                 label="Description"
                 value={sectionData?.description}
@@ -956,25 +959,33 @@ const PageEditor = () => {
               onChange={(val) => onChange('items', val)}
               addItemLabel="Add Item"
               defaultItem={sectionId === 'timeline' ? { year: '', title: '', description: '' } : { title: '', description: '', icon: 'Award' }}
-              renderItem={(item, onUpdate, index) => (
-                <div className="space-y-3">
-                  {sectionId === 'timeline' ? (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      <TextInput
-                        label="Year"
-                        value={item?.year}
-                        onChange={(val) => onUpdate({ ...item, year: val })}
-                        placeholder="2024"
-                      />
-                      <TextInput
-                        label="Title"
-                        value={item?.title}
-                        onChange={(val) => onUpdate({ ...item, title: val })}
-                        placeholder="Event title"
-                      />
-                      <div></div>
-                    </div>
-                  ) : (
+              renderItem={(item, onUpdate, index) => {
+                // Generate years from 1950 to current year + 5, newest first
+                const currentYear = new Date().getFullYear();
+                const years = Array.from({ length: currentYear + 5 - 1950 + 1 }, (_, i) => 1950 + i).reverse();
+
+                return (
+                  <div className="space-y-3">
+                    {sectionId === 'timeline' ? (
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <Select
+                          label="Year"
+                          value={item?.year}
+                          onChange={(val) => onUpdate({ ...item, year: val })}
+                          options={[
+                            { value: '', label: 'Select Year' },
+                            ...years.map(year => ({ value: String(year), label: String(year) }))
+                          ]}
+                        />
+                        <TextInput
+                          label="Title"
+                          value={item?.title}
+                          onChange={(val) => onUpdate({ ...item, title: val })}
+                          placeholder="Event title"
+                        />
+                        <div></div>
+                      </div>
+                    ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <TextInput
                         label="Title"
@@ -1005,7 +1016,8 @@ const PageEditor = () => {
                     rows={2}
                   />
                 </div>
-              )}
+              );
+            }}
             />
             <Toggle
               label="Active"

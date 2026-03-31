@@ -105,10 +105,11 @@ const cleanSectionImages = (section) => {
  * @param {Object} options - Hook options
  * @param {boolean} options.useStaticFallback - Whether to use static data on API failure (default: true)
  * @param {boolean} options.refetchOnFocus - Whether to refetch when window regains focus (default: true)
+ * @param {boolean} options.includeInactive - Whether to include inactive sections (default: false, set true for admin panel)
  * @returns {Object} - { data, loading, error, fromApi, refetch }
  */
 export const usePageData = (pageId, options = {}) => {
-  const { useStaticFallback = true, refetchOnFocus = true } = options;
+  const { useStaticFallback = true, refetchOnFocus = true, includeInactive = false } = options;
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -131,7 +132,9 @@ export const usePageData = (pageId, options = {}) => {
         // IMPORTANT: Keep the FIRST occurrence of each section (in case of duplicates)
         const sectionsMap = {};
         response.data.sections?.forEach(section => {
-          if (section.isActive !== false) {
+          // For admin panel (includeInactive=true), show ALL sections
+          // For public website (includeInactive=false), only show active sections
+          if (includeInactive || section.isActive !== false) {
             // Only add if not already present (keep first occurrence)
             if (!sectionsMap[section.sectionId]) {
               sectionsMap[section.sectionId] = section;
@@ -204,7 +207,7 @@ export const usePageData = (pageId, options = {}) => {
     } finally {
       setLoading(false);
     }
-  }, [pageId, useStaticFallback]);
+  }, [pageId, useStaticFallback, includeInactive]);
 
   // Initial fetch
   useEffect(() => {

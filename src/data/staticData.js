@@ -482,7 +482,7 @@ export const contactStaticData = {
         { label: 'Address', value: '100 Prince Edward St Unit #111, Saint John, NB E2L 4M5', icon: 'MapPin', link: 'https://maps.google.com/?q=100+Prince+Edward+St+Saint+John+NB' },
         { label: 'Phone', value: '(506) 634-8906', icon: 'Phone', link: 'tel:+15066348906' },
         { label: 'Toll-Free', value: '1(800) 561-2463', icon: 'Phone', link: 'tel:+18005612463' },
-        { label: 'Email', value: 'train@seniorwatch.com', icon: 'Mail', link: 'mailto:train@seniorwatch.com' }
+        { label: 'Email', value: 'train@seniorwatch.com', icon: 'Mail', link: 'train@seniorwatch.com', isEmail: true }
       ],
       isActive: true,
       order: 2
@@ -518,7 +518,7 @@ export const contactStaticData = {
       description: 'Have questions about our programs? Our team is ready to help you get started on your healthcare career.',
       items: [
         { icon: 'Phone', title: 'Call Us', subtitle: 'For immediate assistance', value: '(506) 634-8906', link: 'tel:+15066348906' },
-        { icon: 'Mail', title: 'Email Us', subtitle: 'For general inquiries', value: 'train@seniorwatch.com', link: 'mailto:train@seniorwatch.com' },
+        { icon: 'Mail', title: 'Email Us', subtitle: 'For general inquiries', value: 'train@seniorwatch.com', link: 'train@seniorwatch.com', isEmail: true },
         { icon: 'MapPin', title: 'Visit Us', subtitle: 'At our office location', value: 'Get Directions', link: 'https://maps.google.com/?q=100+Prince+Edward+St+Saint+John+NB' }
       ],
       isActive: true,

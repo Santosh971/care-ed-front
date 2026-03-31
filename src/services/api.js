@@ -69,6 +69,7 @@ export const pagesAPI = {
   getSection: (pageId, sectionId) => api.get(`/pages/${pageId}/sections/${sectionId}`),
   updateSection: (pageId, sectionId, data) => api.put(`/pages/${pageId}/sections/${sectionId}`, data),
   createPage: (data) => api.post('/pages', data),
+  savePage: (pageId, data) => api.put(`/pages/${pageId}`, data),
   deletePage: (pageId) => api.delete(`/pages/${pageId}`),
   toggleSection: (pageId, sectionId) => api.patch(`/pages/${pageId}/sections/${sectionId}/toggle`),
   reorderSections: (pageId, sectionOrder) => api.put(`/pages/${pageId}/reorder`, { sectionOrder }),
@@ -119,6 +120,7 @@ export const contactAPI = {
   getById: (id) => api.get(`/contact/${id}`),
   updateStatus: (id, status) => api.put(`/contact/${id}/status`, { status }),
   addNote: (id, note) => api.post(`/contact/${id}/notes`, { note }),
+  deleteContact: (id) => api.delete(`/contact/${id}`),
   getStats: () => api.get('/contact/stats')
 };
 

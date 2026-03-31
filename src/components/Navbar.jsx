@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { Menu, X, Phone, Mail, ChevronRight } from 'lucide-react'
 import logo from '../assets/images/logo.png'
 import useGlobalData from '../hooks/useGlobalData'
+import { getGmailLink } from '../utils/email'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -37,7 +38,20 @@ function Navbar() {
               <Phone size={14} />
               <span>{phone}</span>
             </a>
-            <a href={`mailto:${email}`} className="flex items-center gap-2 hover:text-secondary-light transition-colors">
+            {/* <a href={getGmailLink(email)} className="flex items-center gap-2 hover:text-secondary-light transition-colors">
+              <Mail size={14} />
+              <span>{email}</span>
+            </a> */}
+            <a
+              href={
+                email
+                  ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`
+                  : "#"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-secondary-light transition-colors"
+            >
               <Mail size={14} />
               <span>{email}</span>
             </a>

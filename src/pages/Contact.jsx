@@ -4,6 +4,7 @@ import contact from "../assets/images/contact.jpeg";
 import AnimatedSection from "../components/AnimatedSection";
 import useContactData, { iconMap } from "../hooks/useContactData";
 import { contactAPI } from "../services/api";
+import { getGmailLink, processLink } from "../utils/email";
 
 // Helper to get icon component
 const getIcon = (iconName) => iconMap[iconName] || MapPin;
@@ -28,12 +29,18 @@ const staticContactInfo = [
     content: "1(800) 561-2463",
     link: "tel:+18005612463",
   },
+  // {
+  //   icon: Mail,
+  //   title: "Email",
+  //   content: "train@seniorwatch.com",
+  //   link: "mailto:train@seniorwatch.com",
+  // },
   {
     icon: Mail,
     title: "Email",
     content: "train@seniorwatch.com",
-    link: "mailto:train@seniorwatch.com",
-  },
+    link: getGmailLink("train@seniorwatch.com"),
+  }
 ];
 
 const staticServiceAreas = [
@@ -113,7 +120,11 @@ function Contact() {
     icon: getIcon(item.icon),
     title: item.label || staticContactInfo[index]?.title || '',
     content: item.value || staticContactInfo[index]?.content || '',
-    link: item.link || staticContactInfo[index]?.link || '#',
+    // link: item.link || staticContactInfo[index]?.link || '#',
+    link:
+      item.label?.toLowerCase() === "email"
+        ? getGmailLink(item.value)
+        : item.link || staticContactInfo[index]?.link || "#",
   })) || staticContactInfo;
 
   // Map areas section items to service areas format
@@ -121,19 +132,19 @@ function Contact() {
     typeof item === 'string' ? item : item.name
   ) || staticServiceAreas;
 
-  // Map quick contact items
+  // Map quick contact items - process mailto: links to Gmail
   const quickContactItems = quickContactSection?.items?.map((item, index) => ({
     icon: getIcon(item.icon),
     title: item.title || '',
     subtitle: item.subtitle || '',
     value: item.value || '',
-    link: item.link || '#',
+    link: processLink(item.link, item.value),
   })) || [];
 
   // Static fallback for quick contact
   const staticQuickContactItems = [
     { icon: Phone, title: 'Call Us', subtitle: 'For immediate assistance', value: '(506) 634-8906', link: 'tel:+15066348906' },
-    { icon: Mail, title: 'Email Us', subtitle: 'For general inquiries', value: 'train@seniorwatch.com', link: 'mailto:train@seniorwatch.com' },
+    { icon: Mail, title: 'Email Us', subtitle: 'For general inquiries', value: 'train@seniorwatch.com', link: getGmailLink('train@seniorwatch.com') },
     { icon: MapPin, title: 'Visit Us', subtitle: 'At our office location', value: 'Get Directions', link: 'https://maps.google.com/?q=100+Prince+Edward+St+Saint+John+NB' }
   ];
   const displayQuickContactItems = quickContactItems.length > 0 ? quickContactItems : staticQuickContactItems;

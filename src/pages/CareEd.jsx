@@ -14,6 +14,7 @@ import Instructors from "../assets/images/instructors.jpg";
 import AnimatedSection from "../components/AnimatedSection";
 import Counter from "../components/Counter";
 import useCareEdData, { iconMap, getIcon } from "../hooks/useCareEdData";
+import { getGmailLink } from "../utils/email";
 
 function CareEd() {
   const {
@@ -346,10 +347,29 @@ function CareEd() {
                   </a>
                 )}
               </div>
+              {/* {ctaSection?.contactEmail && (
+                <p className="text-white/80 mt-6">
+                  <strong>Contact:</strong> {ctaSection.contactName || 'Us'} at{' '}
+                  <a href={getGmailLink(ctaSection.contactEmail)} className="underline">
+                    {ctaSection.contactEmail}
+                  </a>
+                </p>
+              )} */}
               {ctaSection?.contactEmail && (
                 <p className="text-white/80 mt-6">
                   <strong>Contact:</strong> {ctaSection.contactName || 'Us'} at{' '}
-                  <a href={`mailto:${ctaSection.contactEmail}`} className="underline">
+                  <a
+                    href={
+                      ctaSection.contactEmail
+                        ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+                          ctaSection.contactEmail
+                        )}`
+                        : "#"
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                  >
                     {ctaSection.contactEmail}
                   </a>
                 </p>
