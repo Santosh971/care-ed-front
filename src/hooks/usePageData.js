@@ -122,7 +122,7 @@ export const usePageData = (pageId, options = {}) => {
 
     try {
       console.log(`[usePageData] Fetching page data for "${pageId}"...`);
-      console.log(`[usePageData] API URL: ${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/pages/${pageId}`);
+      console.log(`[usePageData] API URL: ${import.meta.env.VITE_API_URL || 'https://care-ed-back.onrender.com/api'}/pages/${pageId}`);
 
       const response = await pagesAPI.getPage(pageId);
       console.log(`[usePageData] API response for "${pageId}":`, response);

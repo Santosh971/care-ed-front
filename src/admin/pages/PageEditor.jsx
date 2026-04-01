@@ -222,12 +222,12 @@ const PageEditor = () => {
                 </div>
               </div>
             )}
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
               hint="Show this section on the website"
-            />
+            /> */}
           </div>
         );
 
@@ -283,11 +283,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -459,11 +459,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -529,13 +529,15 @@ const PageEditor = () => {
                 />
                 <TextInput
                   label="Suffix"
-                  value={sectionData?.badge?.suffix || '+'}
+                  value={sectionData?.badge?.suffix ?? '+'}
                   onChange={(val) => onChange('badge', {
                     ...sectionData?.badge,
                     suffix: val
                   })}
                   placeholder="+"
                 />
+
+
                 <TextInput
                   label="Label"
                   value={sectionData?.badge?.label || 'Years Teaching'}
@@ -555,11 +557,11 @@ const PageEditor = () => {
                 onChange={(val) => onChange('buttons', [val])}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -693,11 +695,11 @@ const PageEditor = () => {
                   </div>
                 </div>
               )}
-              <Toggle
+              {/* <Toggle
                 label="Active"
                 checked={sectionData?.isActive !== false}
                 onChange={(val) => onChange('isActive', val)}
-              />
+              /> */}
             </div>
           );
         }
@@ -810,11 +812,11 @@ const PageEditor = () => {
                 onChange={(val) => onChange('buttons', [val])}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -856,11 +858,11 @@ const PageEditor = () => {
                 }}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -927,11 +929,11 @@ const PageEditor = () => {
               onChange={(val) => onChange('images', val ? [val] : [])}
               folder="images"
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -986,44 +988,44 @@ const PageEditor = () => {
                         <div></div>
                       </div>
                     ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <TextInput
-                        label="Title"
-                        value={item?.title}
-                        onChange={(val) => onUpdate({ ...item, title: val })}
-                      />
-                      <Select
-                        label="Icon"
-                        value={item?.icon}
-                        onChange={(val) => onUpdate({ ...item, icon: val })}
-                        options={[
-                          { value: 'Award', label: 'Award' },
-                          { value: 'GraduationCap', label: 'Graduation Cap' },
-                          { value: 'Heart', label: 'Heart' },
-                          { value: 'Users', label: 'Users' },
-                          { value: 'Target', label: 'Target' },
-                          { value: 'CheckCircle', label: 'Check Circle' },
-                          { value: 'BookOpen', label: 'Book Open' },
-                          { value: 'Briefcase', label: 'Briefcase' }
-                        ]}
-                      />
-                    </div>
-                  )}
-                  <TextArea
-                    label="Description"
-                    value={item?.description}
-                    onChange={(val) => onUpdate({ ...item, description: val })}
-                    rows={2}
-                  />
-                </div>
-              );
-            }}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <TextInput
+                          label="Title"
+                          value={item?.title}
+                          onChange={(val) => onUpdate({ ...item, title: val })}
+                        />
+                        <Select
+                          label="Icon"
+                          value={item?.icon}
+                          onChange={(val) => onUpdate({ ...item, icon: val })}
+                          options={[
+                            { value: 'Award', label: 'Award' },
+                            { value: 'GraduationCap', label: 'Graduation Cap' },
+                            { value: 'Heart', label: 'Heart' },
+                            { value: 'Users', label: 'Users' },
+                            { value: 'Target', label: 'Target' },
+                            { value: 'CheckCircle', label: 'Check Circle' },
+                            { value: 'BookOpen', label: 'Book Open' },
+                            { value: 'Briefcase', label: 'Briefcase' }
+                          ]}
+                        />
+                      </div>
+                    )}
+                    <TextArea
+                      label="Description"
+                      value={item?.description}
+                      onChange={(val) => onUpdate({ ...item, description: val })}
+                      rows={2}
+                    />
+                  </div>
+                );
+              }}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1081,11 +1083,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1171,11 +1173,11 @@ const PageEditor = () => {
                 )}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1216,11 +1218,11 @@ const PageEditor = () => {
               folder="images"
               hint="Recommended size: 600x400px"
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1294,11 +1296,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1350,11 +1352,11 @@ const PageEditor = () => {
                 />
               </div>
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1525,11 +1527,11 @@ const PageEditor = () => {
               </div>
             </div>
 
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1602,11 +1604,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1668,11 +1670,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1708,11 +1710,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1747,11 +1749,11 @@ const PageEditor = () => {
                 />
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1823,11 +1825,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1857,11 +1859,11 @@ const PageEditor = () => {
                   onChange={(val) => onChange('buttons', [val])}
                 />
               </div>
-              <Toggle
+              {/* <Toggle
                 label="Active"
                 checked={sectionData?.isActive !== false}
                 onChange={(val) => onChange('isActive', val)}
-              />
+              /> */}
             </div>
           );
         }
@@ -1901,11 +1903,11 @@ const PageEditor = () => {
                 />
               </div>
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -1956,11 +1958,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -2002,11 +2004,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -2049,11 +2051,11 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -2119,11 +2121,11 @@ const PageEditor = () => {
               onChange={(val) => onChange('images', val ? [val] : [])}
               folder="images"
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -2167,11 +2169,11 @@ const PageEditor = () => {
               onChange={(val) => onChange('images', val ? [val] : [])}
               folder="images"
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
 
@@ -2189,11 +2191,11 @@ const PageEditor = () => {
               onChange={(val) => onChange('description', val)}
               rows={4}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
-            />
+            /> */}
           </div>
         );
     }
@@ -2222,11 +2224,10 @@ const PageEditor = () => {
       {/* Status message */}
       {saveStatus.message && (
         <div
-          className={`px-4 py-3 rounded-lg ${
-            saveStatus.type === 'success'
-              ? 'bg-green-50 border border-green-200 text-green-700'
-              : 'bg-red-50 border border-red-200 text-red-700'
-          }`}
+          className={`px-4 py-3 rounded-lg ${saveStatus.type === 'success'
+            ? 'bg-green-50 border border-green-200 text-green-700'
+            : 'bg-red-50 border border-red-200 text-red-700'
+            }`}
         >
           {saveStatus.message}
         </div>
@@ -2252,11 +2253,10 @@ const PageEditor = () => {
             <button
               key={section.id}
               onClick={() => setActiveSection(section.id)}
-              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors ${
-                activeSection === section.id
-                  ? 'bg-secondary text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
-              }`}
+              className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors ${activeSection === section.id
+                ? 'bg-secondary text-white'
+                : 'text-gray-600 hover:bg-gray-100'
+                }`}
             >
               {section.icon && <span>{section.icon}</span>}
               {section.name}
