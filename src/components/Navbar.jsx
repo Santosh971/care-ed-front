@@ -3,18 +3,21 @@ import { Link, NavLink } from 'react-router-dom'
 import { Menu, X, Phone, Mail, ChevronRight } from 'lucide-react'
 import logo from '../assets/images/logo.png'
 import useGlobalData from '../hooks/useGlobalData'
-import { getGmailLink } from '../utils/email'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
-  const { navbarSection, brandingSection, loading } = useGlobalData()
+  const { navbarSection, brandingSection, contactSection, loading } = useGlobalData()
 
-  // Get dynamic data with fallbacks
-  const contactInfo = navbarSection?.content?.contactInfo || {}
-  const tagline = navbarSection?.content?.tagline || 'Professional Healthcare Training Since 2007'
-  const phone = contactInfo.phone || '(506) 634-8906'
-  const email = contactInfo.email || 'info@carelearning.ca'
+  // Get contact info from dedicated contact section (single source of truth)
+  // Fall back to navbar contactInfo for backward compatibility
+  const contact = contactSection?.content || navbarSection?.content?.contactInfo || {}
+  const tagline = navbarSection?.content?.tagline || 'Professional Healthcare Training Since 1987'
+
+  // Contact info from dedicated section (single source of truth)
+  const phone = contact.phone || '(506) 634-8906'
+  const phoneLink = contact.phoneLink || 'tel:+15066348906'
+  const email = contact.email || 'info@carelearning.ca'
 
   // Get logo from branding section with fallback to static import
   const logoUrl = brandingSection?.content?.logo?.url || logo
@@ -24,7 +27,7 @@ function Navbar() {
     { name: 'About', path: '/about' },
     // { name: 'Services', path: '/services' }, // Commented out - care services removed
     { name: 'Programs', path: '/care-ed' },
-    // { name: 'Careers', path: '/careers' }, // Commented out - renamed to Programs
+    { name: 'Careers', path: '/careers' }, // Commented out - renamed to Programs
     { name: 'Contact', path: '/contact' },
   ]
 
@@ -34,20 +37,12 @@ function Navbar() {
       <div className="bg-gradient-to-r from-primary to-primary-dark text-white py-2 hidden md:block">
         <div className="container-custom flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
-            <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="flex items-center gap-2 hover:text-secondary-light transition-colors">
+            <a href={phoneLink} className="flex items-center gap-2 hover:text-secondary-light transition-colors">
               <Phone size={14} />
               <span>{phone}</span>
             </a>
-            {/* <a href={getGmailLink(email)} className="flex items-center gap-2 hover:text-secondary-light transition-colors">
-              <Mail size={14} />
-              <span>{email}</span>
-            </a> */}
             <a
-              href={
-                email
-                  ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`
-                  : "#"
-              }
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-secondary-light transition-colors"

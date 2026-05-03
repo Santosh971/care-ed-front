@@ -25,7 +25,7 @@ export const homeStaticData = {
     hero: {
       sectionId: 'hero',
       title: 'Build Your Healthcare Career',
-      subtitle: 'Professional Healthcare Training Since 2007',
+      subtitle: 'Professional Healthcare Training Since 1987',
       description: 'Quality education and professional training programs for aspiring healthcare professionals. Get certified and start making a difference.',
       images: [{ url: backimg, alt: 'Healthcare training facility' }],
       buttons: [
@@ -80,7 +80,7 @@ export const homeStaticData = {
     about: {
       sectionId: 'about',
       title: 'Professional Healthcare Education & Training',
-      description: 'Care-Ed Learning Center has been providing quality healthcare education and professional training since 2007. Our programs are designed to prepare students for rewarding careers in healthcare.',
+      description: 'Care-Ed Learning Center has been providing quality healthcare education and professional training since 1987. Our programs are designed to prepare students for rewarding careers in healthcare.',
       content: 'We offer approved training programs with hands-on practicums, classroom lectures, and professional mentoring. Our goal is to provide research-based knowledge and skill-building opportunities.',
       features: [
         'Licensed RN/LPN Instructors',
@@ -158,7 +158,7 @@ export const aboutStaticData = {
       sectionId: 'hero',
       title: 'About Care-Ed',
       subtitle: 'Excellence in Healthcare Education Since 1987',
-      description: 'Professional healthcare education since 2007. We provide quality training programs that prepare students for rewarding careers in healthcare.',
+      description: 'Professional healthcare education since 1987. We provide quality training programs that prepare students for rewarding careers in healthcare.',
       images: [{ url: aboutus, alt: 'Care-Ed team' }],
       buttons: [
         { text: 'Contact Us', link: '/contact', style: 'primary' },
@@ -172,7 +172,7 @@ export const aboutStaticData = {
       title: 'Our Mission',
       description: '"To provide customized, client-sensitive support services and education programs resulting in improved standards, attitudes and services."',
       content: {
-        vision: 'Care-Ed Learning Center, established in 2007, is the educational division of Care-ed Inc. We offer approved training programs including Personal Support Worker (PSW), First Aid & CPR, Foot Care Management, and specialized workshops.'
+        vision: 'Care-Ed Learning Center, established in 1987, is the educational division of Care-ed Inc. We offer approved training programs including Personal Support Worker (PSW), First Aid & CPR, Foot Care Management, and specialized workshops.'
       },
       stats: [
         { number: 15, suffix: '+', label: 'Years Teaching' },
@@ -203,7 +203,7 @@ export const aboutStaticData = {
         { year: '1987', title: 'Company Founded', description: 'Care-ed was established by Jean E. Porter Mowatt and Sharon A. O\'Brien.' },
         { year: '1993', title: 'Educational Endowment', description: 'Established an Educational Endowment Fund to support caregiver education.' },
         { year: '2001', title: 'Learn While You Earn', description: 'Launched Employee in Action – Learn While You Earn Program.' },
-        { year: '2007', title: 'Care-Ed Learning Center', description: 'Founded Care-Ed Learning Center for professional healthcare training.' },
+        { year: '1987', title: 'Care-Ed Learning Center', description: 'Founded Care-Ed Learning Center for professional healthcare training.' },
         { year: 'Today', title: 'Continuing Excellence', description: '15+ years of quality healthcare education and professional training programs.' }
       ],
       isActive: true,
@@ -328,10 +328,10 @@ export const careEdStaticData = {
     hero: {
       sectionId: 'hero',
       title: 'Care-Ed Learning Center',
-      subtitle: 'Professional Training Since 2007',
+      subtitle: 'Professional Training Since 1987',
       description: 'Professional healthcare education and training programs designed to prepare students for successful careers.',
       badge: {
-        text: 'Professional Training Since 2007',
+        text: 'Professional Training Since 1987',
         icon: 'GraduationCap'
       },
       images: [],
@@ -419,44 +419,214 @@ export const careersStaticData = {
   sections: {
     hero: {
       sectionId: 'hero',
-      title: 'Join Our Team',
-      subtitle: 'Build Your Career with Care-Ed',
-      description: 'Join a team dedicated to making a difference in healthcare education.',
+      title: 'Career Services',
+      subtitle: 'Student Success Center',
+      description: 'We support our students throughout their journey — from training to job placement and beyond. Our career services team helps you build skills, find opportunities, and launch your healthcare career.',
+      badge: {
+        text: 'Student Success Center',
+        icon: 'GraduationCap'
+      },
+      images: [],
       isActive: true,
       order: 1
     },
-    positions: {
-      sectionId: 'positions',
-      title: 'Current Openings',
+    careerServices: {
+      sectionId: 'careerServices',
+      title: 'Our Career Services',
+      subtitle: 'We help students become job-ready and successfully placed in the healthcare industry.',
       items: [
-        { id: 'psw-instructor', title: 'PSW Instructor', type: 'Full-time', location: 'Saint John, NB', requirements: ['PSW Certificate', '3+ years experience', 'Teaching experience preferred'] },
-        { id: 'clinical-supervisor', title: 'Clinical Supervisor', type: 'Full-time', location: 'Saint John, NB', requirements: ['RN or RPN designation', 'Supervisory experience', 'Strong communication skills'] },
-        { id: 'program-coordinator', title: 'Program Coordinator', type: 'Full-time', location: 'Saint John, NB', requirements: ['Administrative experience', 'Healthcare background', 'Organizational skills'] }
+        { id: 'job-placement-assistance', icon: 'Briefcase', title: 'Job Placement Assistance', subtitle: 'Connecting you with top healthcare employers', description: 'We connect graduates with healthcare employers and job opportunities across New Brunswick.', imageUrl: '/images/career-job-placement.jpg' },
+        { id: 'resume-building', icon: 'FileText', title: 'Resume Building', subtitle: 'Stand out with a professional healthcare resume', description: 'Professional resume support to help you stand out in the healthcare job market.', imageUrl: '/images/career-resume.jpg' },
+        { id: 'interview-preparation', icon: 'Users', title: 'Interview Preparation', subtitle: 'Walk in confident, walk out hired', description: 'Mock interviews and expert guidance to help you succeed in your job interviews.', imageUrl: '/images/career-interview.jpg' },
+        { id: 'career-counselling', icon: 'Target', title: 'Career Counselling', subtitle: 'Your career path, guided by experts', description: 'One-on-one guidance to plan your career path in the healthcare industry.', imageUrl: '/images/career-counselling.jpg' },
+        { id: 'internship-support', icon: 'GraduationCap', title: 'Internship Support', subtitle: 'Real-world experience through our partner network', description: 'Hands-on training and real-world experience through our partner network.', imageUrl: '/images/career-internship.jpg' },
+        { id: 'skill-development', icon: 'Rocket', title: 'Skill Development', subtitle: 'Workshops to sharpen your professional edge', description: 'Workshops for communication, workplace readiness, and professional growth.', imageUrl: '/images/career-skills.jpg' }
       ],
       isActive: true,
       order: 2
     },
-    benefits: {
-      sectionId: 'benefits',
-      title: 'Benefits & Perks',
+    careerJourney: {
+      sectionId: 'careerJourney',
+      title: 'Your Career Journey',
+      subtitle: 'A clear path from education to employment — we guide you every step of the way.',
       items: [
-        { title: 'Competitive Salary', icon: 'DollarSign' },
-        { title: 'Health Benefits', icon: 'Heart' },
-        { title: 'Professional Development', icon: 'BookOpen' },
-        { title: 'Flexible Scheduling', icon: 'Calendar' },
-        { title: 'Supportive Team', icon: 'Users' },
-        { title: 'Meaningful Work', icon: 'Award' }
+        { icon: 'GraduationCap', title: 'Learn', description: 'Enroll in our accredited programs' },
+        { icon: 'Award', title: 'Train', description: 'Gain hands-on practical experience' },
+        { icon: 'Briefcase', title: 'Internship', description: 'Real-world placement opportunities' },
+        { icon: 'Rocket', title: 'Get Hired', description: 'Launch your healthcare career' }
       ],
       isActive: true,
       order: 3
     },
-    contact: {
-      sectionId: 'contact',
-      title: 'Apply Now',
-      description: 'Send your resume and cover letter to careers@careed.com',
-      content: { email: 'careers@careed.com', phone: '(506) 635-1234' },
+    whyJoinUs: {
+      sectionId: 'whyJoinUs',
+      title: 'Why Work With Us?',
+      description: "At Care-ed, we've been providing quality healthcare education and employment opportunities for over 15 years. We value our employees and offer competitive benefits, professional development, and a supportive work environment.",
       isActive: true,
       order: 4
+    },
+    positions: {
+      sectionId: 'positions',
+      title: 'Open Positions',
+      subtitle: 'Explore our current job openings and find the perfect fit for your skills and interests.',
+      items: [
+        {
+          id: 'psw',
+          title: 'Personal Support Worker',
+          location: 'Greater Saint John',
+          type: 'Full-time / Part-time',
+          description: 'Provide compassionate care to seniors in their homes or hospital settings. Assist with daily living activities, meal preparation, and wellness promotion.',
+          requirements: [
+            'Current CPR and First Aid Certification',
+            'PSW Certificate (training available)',
+            'Access to a car',
+            'Background checks required'
+          ]
+        },
+        {
+          id: 'schedule-manager',
+          title: 'Schedule Manager',
+          location: 'Greater Saint John',
+          type: 'Full-time',
+          description: 'Coordinate and manage caregiver schedules to ensure seamless coverage for all clients. Handle scheduling conflicts and communicate with staff and families.',
+          requirements: [
+            'Strong organizational skills',
+            'Experience in healthcare scheduling preferred',
+            'Excellent communication skills',
+            'Proficiency with scheduling software'
+          ]
+        },
+        {
+          id: 'foot-care-nurse',
+          title: 'Foot Care Nurse',
+          location: 'Greater Saint John',
+          type: 'Full-time / Part-time',
+          description: 'Provide professional foot care services to seniors, including treatment of calluses, corns, and thickened nails. Work in clinic, home, or hospital settings.',
+          requirements: [
+            'Current RN or LPN license',
+            'Foot Care Management certification preferred',
+            'Experience in geriatric care',
+            'Valid driver\'s license'
+          ]
+        },
+        {
+          id: 'international-medical',
+          title: 'Trained Medical Internationals',
+          location: 'Greater Saint John',
+          type: 'Full-time',
+          description: 'International healthcare professionals looking to gain Canadian work experience in senior care. We provide support and mentorship.',
+          requirements: [
+            'Medical credentials from home country',
+            'Interest in senior care',
+            'Valid work permit',
+            'Good communication skills in English'
+          ]
+        },
+        {
+          id: 'psw-training',
+          title: 'PSW on-the-job Training for Internationals',
+          location: 'Greater Saint John',
+          type: 'Full-time',
+          description: 'Combined training and employment program for international candidates. Learn while you earn through our Care-Ed Learning Center.',
+          requirements: [
+            'Interest in healthcare career',
+            'Valid work permit',
+            'Commitment to complete training',
+            'Good communication skills'
+          ]
+        }
+      ],
+      isActive: true,
+      order: 7
+    },
+    benefits: {
+      sectionId: 'benefits',
+      title: 'Benefits & Perks',
+      sectionImage: null,
+      items: [
+        { icon: 'Heart', title: 'Health Insurance', description: 'Comprehensive health coverage with prescriptions, dental, and vision for full-time employees' },
+        { icon: 'Users', title: 'Family Health Plan', description: 'Family health plan available for eligible employees' },
+        { icon: 'GraduationCap', title: 'Training Programs', description: 'PSW training and professional development opportunities' },
+        { icon: 'Clock', title: 'Flexible Hours', description: 'Part-time or full-time employment options to suit your schedule' }
+      ],
+      isActive: true,
+      order: 5
+    },
+    employerConnections: {
+      sectionId: 'employerConnections',
+      title: 'Employer Connections',
+      description: 'We maintain strong relationships with healthcare facilities, nursing homes, and home care providers across New Brunswick. Our graduates are sought after by employers who value quality training.',
+      points: [
+        'Direct connections with healthcare employers',
+        'Job placement assistance for graduates',
+        'Internship opportunities with partner facilities',
+        'Career guidance from industry professionals'
+      ],
+      ctaCard: {
+        title: 'For Healthcare Employers',
+        description: 'Looking to hire qualified healthcare professionals? Partner with us to access trained and certified graduates ready to make an impact.',
+        buttonText: 'Partner With Us',
+        buttonLink: '/contact'
+      },
+      isActive: true,
+      order: 6
+    },
+    generalRequirements: {
+      sectionId: 'generalRequirements',
+      title: 'General Requirements',
+      description: "All positions require the following documentation and certifications. Don't worry if you don't have everything — we offer training programs to help you get qualified.",
+      requirements: [
+        'Current CPR and First Aid Certification',
+        'PSW Certificate (training available through Care-Ed Learning Program)',
+        'Willingness to work 30-44 hours per week',
+        'Access to a car',
+        'DSD Record Check',
+        'Vulnerable Sector Check',
+        'Criminal Record Check'
+      ],
+      isActive: true,
+      order: 8
+    },
+    trainingCard: {
+      sectionId: 'trainingCard',
+      title: 'Training Available',
+      description: "Don't have your PSW Certificate yet? We offer comprehensive training through our Care-Ed Learning Center. Our Learn While You Earn program allows you to gain valuable experience while completing your certification.",
+      highlights: [
+        'Comprehensive PSW certification program',
+        'Hands-on clinical experience',
+        'Flexible scheduling options',
+        'CPR & First Aid certification included',
+        'Job placement assistance upon completion'
+      ],
+      ctaText: 'Learn About PSW Training',
+      ctaLink: '/care-ed',
+      isActive: true,
+      order: 9
+    },
+    howToApply: {
+      sectionId: 'howToApply',
+      title: 'How to Apply',
+      description: 'Ready to join our team? Here\'s how to submit your application.',
+      email: 'train@seniorwatch.com',
+      phone: '(506) 634-8906',
+      applicationFormat: [
+        'Resume in MS Word or PDF format',
+        'Cover letter indicating position of interest',
+        'Include relevant certifications and references'
+      ],
+      isActive: true,
+      order: 10
+    },
+    cta: {
+      sectionId: 'cta',
+      title: 'Ready to Start Your Healthcare Career?',
+      description: 'Our career services team is here to guide you every step of the way. Get personalized career guidance from industry professionals.',
+      buttons: [
+        { text: 'Get Career Guidance', link: '/contact', style: 'primary' },
+        { text: 'Explore Programs', link: '/care-ed', style: 'secondary' }
+      ],
+      isActive: true,
+      order: 11
     }
   }
 };
@@ -582,7 +752,7 @@ export const globalStaticData = {
           phone: '(506) 634-8906',
           email: 'info@carelearning.ca'
         },
-        tagline: 'Professional Healthcare Training Since 2007'
+        tagline: 'Professional Healthcare Training Since 1987'
       },
       isActive: true,
       order: 1
@@ -593,7 +763,7 @@ export const globalStaticData = {
       content: {
         companyInfo: {
           name: 'Care-Ed Learning Center',
-          description: 'Professional healthcare education and training since 2007. Building careers through quality education.',
+          description: 'Professional healthcare education and training since 1987. Building careers through quality education.',
           address: '100 Prince Edward St, Saint John, NB'
         },
         quickLinks: [
@@ -622,6 +792,28 @@ export const globalStaticData = {
       },
       isActive: true,
       order: 2
+    },
+    contact: {
+      sectionId: 'contact',
+      title: 'Contact Information',
+      content: {
+        phone: '(506) 634-8906',
+        phoneLink: 'tel:+15066348906',
+        tollFree: '1(800) 561-2463',
+        email: 'info@carelearning.ca',
+        emailSecondary: 'train@seniorwatch.com',
+        contactPersonName: 'Heidi',
+        address: {
+          street: '100 Prince Edward St Unit #111',
+          city: 'Saint John',
+          province: 'NB',
+          postalCode: 'E2L 4M5',
+          full: '100 Prince Edward St Unit #111, Saint John, NB E2L 4M5'
+        },
+        serviceAreas: ['Saint John', 'Quispamsis', 'Rothesay', 'Grand Bay-Westfield']
+      },
+      isActive: true,
+      order: 3
     }
   }
 };

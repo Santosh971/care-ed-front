@@ -106,6 +106,7 @@ const processGlobalData = (pageData) => {
     brandingSection: processBrandingSection(apiSections.branding, staticSections.branding),
     navbarSection: processNavbarSection(apiSections.navbar, staticSections.navbar),
     footerSection: processFooterSection(apiSections.footer, staticSections.footer),
+    contactSection: processContactSection(apiSections.contact, staticSections.contact),
   };
 };
 
@@ -192,6 +193,36 @@ const processFooterSection = (apiFooter, staticFooter) => {
     },
     isActive: apiFooter.isActive ?? staticFooter.isActive,
     order: apiFooter.order ?? staticFooter.order,
+  };
+};
+
+/**
+ * Process Contact Section - Single source of truth for all contact info
+ */
+const processContactSection = (apiContact, staticContact) => {
+  if (!apiContact) return staticContact;
+
+  return {
+    sectionId: ensureString(apiContact.sectionId) || staticContact.sectionId,
+    title: ensureString(apiContact.title) || staticContact.title,
+    content: {
+      phone: ensureString(apiContact.content?.phone) || staticContact.content?.phone || '(506) 634-8906',
+      phoneLink: ensureString(apiContact.content?.phoneLink) || staticContact.content?.phoneLink || 'tel:+15066348906',
+      tollFree: ensureString(apiContact.content?.tollFree) || staticContact.content?.tollFree || '1(800) 561-2463',
+      email: ensureString(apiContact.content?.email) || staticContact.content?.email || 'info@carelearning.ca',
+      emailSecondary: ensureString(apiContact.content?.emailSecondary) || staticContact.content?.emailSecondary || 'train@seniorwatch.com',
+      contactPersonName: ensureString(apiContact.content?.contactPersonName) || staticContact.content?.contactPersonName || 'Heidi',
+      address: {
+        street: ensureString(apiContact.content?.address?.street) || staticContact.content?.address?.street || '100 Prince Edward St Unit #111',
+        city: ensureString(apiContact.content?.address?.city) || staticContact.content?.address?.city || 'Saint John',
+        province: ensureString(apiContact.content?.address?.province) || staticContact.content?.address?.province || 'NB',
+        postalCode: ensureString(apiContact.content?.address?.postalCode) || staticContact.content?.address?.postalCode || 'E2L 4M5',
+        full: ensureString(apiContact.content?.address?.full) || staticContact.content?.address?.full || '100 Prince Edward St Unit #111, Saint John, NB E2L 4M5',
+      },
+      serviceAreas: apiContact.content?.serviceAreas || staticContact.content?.serviceAreas || ['Saint John', 'Quispamsis', 'Rothesay', 'Grand Bay-Westfield'],
+    },
+    isActive: apiContact.isActive ?? staticContact.isActive,
+    order: apiContact.order ?? staticContact.order,
   };
 };
 

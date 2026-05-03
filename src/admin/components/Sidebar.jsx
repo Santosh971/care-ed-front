@@ -73,12 +73,12 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       icon: GraduationCap,
       path: '/admin/pages/care-ed'
     },
-    // {
-    //   id: 'careers',
-    //   label: 'Careers Page',
-    //   icon: Users,
-    //   path: '/admin/pages/careers'
-    // },
+    {
+      id: 'careers',
+      label: 'Careers Page',
+      icon: Users,
+      path: '/admin/pages/careers'
+    },
     {
       id: 'contact',
       label: 'Contact Page',

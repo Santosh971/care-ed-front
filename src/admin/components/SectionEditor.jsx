@@ -323,7 +323,9 @@ export const URLInput = ({ label, value, onChange, hint }) => {
 // Array/List editor for items
 export const ArrayEditor = ({ label, items, onChange, renderItem, addItemLabel = 'Add Item', defaultItem = {} }) => {
   const handleAdd = () => {
-    onChange([...(items || []), { ...defaultItem }]);
+    // Handle both string and object default items
+    const newItem = typeof defaultItem === 'string' ? defaultItem : { ...defaultItem };
+    onChange([...(items || []), newItem]);
   };
 
   const handleRemove = (index) => {

@@ -23,6 +23,7 @@ import why_choose from "../assets/images/teaching.jpg";
 import AnimatedSection from "../components/AnimatedSection";
 import Counter from "../components/Counter";
 import useAboutData from "../hooks/useAboutData";
+import useGlobalData from "../hooks/useGlobalData";
 
 // Icon mapping
 const iconMap = {
@@ -50,7 +51,7 @@ const staticTimeline = [
   { year: "1987", title: "Company Founded", description: "Care-ed was established by Jean E. Porter Mowatt and Sharon A. O'Brien." },
   { year: "1993", title: "Educational Endowment", description: "Established an Educational Endowment Fund to support caregiver education." },
   { year: "2001", title: "Learn While You Earn", description: "Launched Employee in Action – Learn While You Earn Program." },
-  { year: "2007", title: "Care-Ed Learning Center", description: "Founded Care-Ed Learning Center for professional healthcare training." },
+  { year: "1987", title: "Care-Ed Learning Center", description: "Founded Care-Ed Learning Center for professional healthcare training." },
   { year: "Today", title: "Continuing Excellence", description: "15+ years of quality healthcare education and professional training programs." },
 ];
 
@@ -89,6 +90,10 @@ function About() {
     loading,
     fromApi
   } = useAboutData();
+
+  // Get global contact settings for the Visit Us card
+  const { contactSection } = useGlobalData();
+  const globalContact = contactSection?.content || {};
 
   // Map timeline data
   const timeline = timelineSection?.items?.map((item, index) => ({
@@ -150,7 +155,7 @@ function About() {
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={200}>
               <p className="text-xl text-gray-200 leading-relaxed mb-8">
-                {heroSection?.description || "Professional healthcare education since 2007. We provide quality training programs that prepare students for rewarding careers in healthcare."}
+                {heroSection?.description || "Professional healthcare education since 1987. We provide quality training programs that prepare students for rewarding careers in healthcare."}
               </p>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={300}>
@@ -186,7 +191,7 @@ function About() {
                 {missionSection?.description || `"To provide customized, client-sensitive support services and education programs resulting in improved standards, attitudes and services."`}
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
-                {missionSection?.content?.vision || "Care-Ed Learning Center, established in 2007, is the educational division of Care-ed Inc. We offer approved training programs including Personal Support Worker (PSW), First Aid & CPR, Foot Care Management, and specialized workshops."}
+                {missionSection?.content?.vision || "Care-Ed Learning Center, established in 1987, is the educational division of Care-ed Inc. We offer approved training programs including Personal Support Worker (PSW), First Aid & CPR, Foot Care Management, and specialized workshops."}
               </p>
               <div className="grid grid-cols-2 gap-6">
                 {(missionSection?.stats || [
@@ -257,7 +262,7 @@ function About() {
       </section>
 
       {/* Timeline Section */}
-      <section className="py-10 md:py-20 bg-white">
+      {/* <section className="py-10 md:py-20 bg-white">
         <div className="container-custom">
           <AnimatedSection animation="fade-up">
             <div className="text-center mb-16">
@@ -288,6 +293,49 @@ function About() {
                     </h3>
                     <p className="text-gray-600">{item.description}</p>
                   </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>   */}
+      <section className="py-10 md:py-20 bg-white">
+        <div className="container-custom">
+          <AnimatedSection animation="fade-up">
+            <div className="text-center mb-10 md:mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
+                {timelineSection?.title || "Our Journey"}
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                {timelineSection?.subtitle || "A legacy of healthcare education and professional training."}
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="max-w-4xl mx-auto">
+            {timeline.map((item, index) => (
+              <AnimatedSection key={index} animation="fade-left" delay={index * 100}>
+                <div className="flex gap-4 md:gap-8 mb-8 md:mb-12 last:mb-0  ">
+
+                  {/* Timeline dot + line */}
+                  <div className="flex flex-col items-center flex-shrink-0">
+                    <div className="w-3 h-3 md:w-4 md:h-4 bg-secondary rounded-full mt-1"></div>
+                    {index < timeline.length - 1 && (
+                      <div className="w-0.5 flex-1 bg-secondary/20 mt-2 min-h-[2rem]"></div>
+                    )}
+                  </div>
+
+                  {/* Card */}
+                  <div className="bg-gray-50 rounded-2xl p-4 md:p-6 flex-1 mb-2 md:mb-0">
+                    <div className="text-xl md:text-2xl font-bold text-secondary mb-1">
+                      {item.year}
+                    </div>
+                    <h3 className="text-lg md:text-xl font-semibold text-primary mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-600">{item.description}</p>
+                  </div>
+
                 </div>
               </AnimatedSection>
             ))}
@@ -417,23 +465,23 @@ function About() {
                   </div>
                 </div>
                 <div className="">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-white/10 rounded-4xl p-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-white/10 rounded-2xl p-4">
                     <div>
                       <div className="flex items-center gap-3 mb-4">
                         <MapPin size={24} className="text-secondary-light" />
                         <h3 className="text-xl font-semibold">{locationSection?.visitLabel || "Visit Us"}</h3>
                       </div>
                       <p className="text-gray-200 mb-2">
-                        {locationSection?.address?.street || "100 Prince Edward St Unit #111"}
+                        {globalContact.address?.street || locationSection?.address?.street || "100 Prince Edward St Unit #111"}
                       </p>
                       <p className="text-gray-200 mb-4">
-                        {locationSection?.address?.city || "Saint John, NB E2L 4M5"}
+                        {globalContact.address?.city ? `${globalContact.address.city}, ${globalContact.address.province || ''} ${globalContact.address.postalCode || ''}`.trim() : locationSection?.address?.city || "Saint John, NB E2L 4M5"}
                       </p>
                       <p className="text-gray-200 mb-1">
-                        Phone: {locationSection?.phone || "(506) 634-8906"}
+                        Phone: <a href={globalContact.phoneLink || "tel:+15066348906"} className="hover:text-secondary-light transition-colors">{globalContact.phone || locationSection?.phone || "(506) 634-8906"}</a>
                       </p>
                       <p className="text-gray-200">
-                        Toll-Free: {locationSection?.tollFree || "1(800) 561-2463"}
+                        Toll-Free: {globalContact.tollFree || locationSection?.tollFree || "1(800) 561-2463"}
                       </p>
                     </div>
                     <div className="bg-white/10 rounded-2xl overflow-hidden aspect-square">

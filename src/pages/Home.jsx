@@ -23,6 +23,12 @@ import join from "../assets/images/joinus.avif";
 import AnimatedSection from "../components/AnimatedSection";
 import Counter from "../components/Counter";
 import useHomeData, { iconMap } from "../hooks/useHomeData";
+import student1 from "../assets/images/student-1.avif"
+import student2 from "../assets/images/Student-2.webp"
+import student3 from "../assets/images/Student-3.jpg"
+import student4 from "../assets/images/Student-4.jpg"
+import student5 from "../assets/images/Student-5.jpg"
+import student6 from "../assets/images/Student-6.jpg"
 
 // Helper to get icon component from string name
 const getIcon = (iconName) => iconMap[iconName] || Award;
@@ -73,7 +79,7 @@ function Home() {
 
   // Hero section data
   const heroTitle = heroSection?.title || "Build Your Healthcare Career";
-  const heroSubtitle = heroSection?.subtitle || "Professional Healthcare Training Since 2007";
+  const heroSubtitle = heroSection?.subtitle || "Professional Healthcare Training Since 1987";
   const heroDescription = heroSection?.description || "Quality education and professional training programs for aspiring healthcare professionals. Get certified and start making a difference.";
   const heroImage = heroSection?.images?.[0]?.url || backimg;
 
@@ -145,13 +151,27 @@ function Home() {
             <AnimatedSection animation="fade-up" delay={400}>
               <div className="flex flex-wrap items-center gap-4 md:gap-8">
                 <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
+                  {/* <div className="flex -space-x-2">
                     {Array.from({ length: heroSection?.trustIndicators?.avatarCount || 4 }, (_, i) => (
                       <div
                         key={i}
                         className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-secondary-light to-secondary flex items-center justify-center text-white text-xs font-bold border-2 border-white/30"
                       >
                         {i + 1}
+                      </div>
+                    ))}
+                  </div> */}
+                  <div className="flex -space-x-2">
+                    {[student1, student2, student3, student4, student5, student6].map((img, i) => (
+                      <div
+                        key={i}
+                        className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white/30 overflow-hidden"
+                      >
+                        <img
+                          src={img}
+                          alt={`Student ${i + 1}`}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                     ))}
                   </div>
@@ -342,7 +362,7 @@ function Home() {
             <AnimatedSection animation="fade-right">
               <div className="relative">
                 <div className="relative">
-                  <div className="absolute -top-4 -left-4 w-16 h-16 md:w-20 md:h-20 bg-secondary/30 rounded-xl"></div>
+                  <div className="absolute -top-4 -left-4 w-16 h-26 md:w-20 md:h-20 bg-secondary/30 rounded-xl"></div>
                   <img
                     src={aboutSection?.images?.[0]?.url || training_2}
                     alt="About Care-Ed"
@@ -369,7 +389,7 @@ function Home() {
                 {aboutSection?.title || "Professional Healthcare Education & Training"}
               </h2>
               <p className="text-base md:text-lg lg:text-xl text-gray-200 mb-4 md:mb-6 leading-relaxed">
-                {aboutSection?.description || "Care-Ed Learning Center has been providing quality healthcare education and professional training since 2007. Our programs are designed to prepare students for rewarding careers in healthcare."}
+                {aboutSection?.description || "Care-Ed Learning Center has been providing quality healthcare education and professional training since 1987. Our programs are designed to prepare students for rewarding careers in healthcare."}
               </p>
               <p className="text-gray-300 text-sm md:text-base mb-6 md:mb-8 leading-relaxed">
                 {aboutSection?.content || "We offer approved training programs with hands-on practicums, classroom lectures, and professional mentoring. Our goal is to provide research-based knowledge and skill-building opportunities."}

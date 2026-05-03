@@ -2,7 +2,9 @@ import axios from 'axios';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://care-ed-back.onrender.com/api',
+  // baseURL: import.meta.env.VITE_API_URL || 'https://node.carelearning.ca/api',
+  baseURL: 'http://localhost:5000/api',
+
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json'
@@ -82,7 +84,9 @@ export const mediaAPI = {
     // Don't set Content-Type - let browser set it with correct boundary for FormData
     const token = localStorage.getItem('adminToken');
     return axios.post(
-      `${import.meta.env.VITE_API_URL || 'https://care-ed-back.onrender.com/api'}/media/upload/image`,
+      // `${import.meta.env.VITE_API_URL || 'https://node.carelearning.ca/api'}/media/upload/image`,
+      `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/media/upload/image`,
+
       formData,
       {
         timeout: 60000, // 60 seconds for uploads
@@ -96,7 +100,9 @@ export const mediaAPI = {
   uploadIcon: (formData) => {
     const token = localStorage.getItem('adminToken');
     return axios.post(
-      `${import.meta.env.VITE_API_URL || 'https://care-ed-back.onrender.com/api'}/media/upload/icon`,
+      // `${import.meta.env.VITE_API_URL || 'https://node.carelearning.ca/api'}/media/upload/icon`,
+      `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/media/upload/image`,
+
       formData,
       {
         timeout: 60000,

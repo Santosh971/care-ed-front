@@ -14,6 +14,7 @@ import Instructors from "../assets/images/instructors.jpg";
 import AnimatedSection from "../components/AnimatedSection";
 import Counter from "../components/Counter";
 import useCareEdData, { iconMap, getIcon } from "../hooks/useCareEdData";
+import useGlobalData from "../hooks/useGlobalData";
 import { getGmailLink } from "../utils/email";
 
 function CareEd() {
@@ -28,6 +29,10 @@ function CareEd() {
     loading,
     fromApi
   } = useCareEdData();
+
+  // Get global contact settings for fallback
+  const { contactSection } = useGlobalData();
+  const globalContact = contactSection?.content || {};
 
   // Map programs data
   const programs = programsSection?.items?.map((item) => ({
@@ -59,7 +64,7 @@ function CareEd() {
               <div className="inline-flex items-center gap-2 bg-secondary/20 text-secondary-light px-4 py-2 rounded-full mb-6">
                 <GraduationCap size={16} />
                 <span className="text-sm font-medium">
-                  {heroSection?.badge?.text || heroSection?.subtitle || "Professional Training Since 2007"}
+                  {heroSection?.badge?.text || heroSection?.subtitle || "Professional Training Since 1987"}
                 </span>
               </div>
             </AnimatedSection>
@@ -355,22 +360,18 @@ function CareEd() {
                   </a>
                 </p>
               )} */}
-              {ctaSection?.contactEmail && (
+              {(globalContact.contactPersonName || globalContact.email) && (
                 <p className="text-white/80 mt-6">
-                  <strong>Contact:</strong> {ctaSection.contactName || 'Us'} at{' '}
+                  <strong>Contact:</strong> {globalContact.contactPersonName || 'Heidi'} at{' '}
                   <a
-                    href={
-                      ctaSection.contactEmail
-                        ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-                          ctaSection.contactEmail
-                        )}`
-                        : "#"
-                    }
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+                      globalContact.email || ' info@carelearning.ca'
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="underline"
                   >
-                    {ctaSection.contactEmail}
+                    {globalContact.email || ' info@carelearning.ca'}
                   </a>
                 </p>
               )}

@@ -3,52 +3,12 @@ import { Phone, Mail, MapPin, Clock, Send, CheckCircle, Loader2 } from "lucide-r
 import contact from "../assets/images/contact.jpeg";
 import AnimatedSection from "../components/AnimatedSection";
 import useContactData, { iconMap } from "../hooks/useContactData";
+import useGlobalData from "../hooks/useGlobalData";
 import { contactAPI } from "../services/api";
 import { getGmailLink, processLink } from "../utils/email";
 
 // Helper to get icon component
 const getIcon = (iconName) => iconMap[iconName] || MapPin;
-
-// Static fallback data
-const staticContactInfo = [
-  {
-    icon: MapPin,
-    title: "Address",
-    content: "100 Prince Edward St Unit #111\nSaint John, NB E2L 4M5",
-    link: "https://maps.google.com/?q=100+Prince+Edward+St+Saint+John+NB",
-  },
-  {
-    icon: Phone,
-    title: "Phone",
-    content: "(506) 634-8906",
-    link: "tel:+15066348906",
-  },
-  {
-    icon: Phone,
-    title: "Toll-Free",
-    content: "1(800) 561-2463",
-    link: "tel:+18005612463",
-  },
-  // {
-  //   icon: Mail,
-  //   title: "Email",
-  //   content: "train@seniorwatch.com",
-  //   link: "mailto:train@seniorwatch.com",
-  // },
-  {
-    icon: Mail,
-    title: "Email",
-    content: "train@seniorwatch.com",
-    link: getGmailLink("train@seniorwatch.com"),
-  }
-];
-
-const staticServiceAreas = [
-  "Saint John",
-  "Quispamsis",
-  "Rothesay",
-  "Grand Bay-Westfield",
-];
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -71,6 +31,45 @@ function Contact() {
     loading,
     fromApi
   } = useContactData();
+
+  // Get global contact info for fallback
+  const { contactSection } = useGlobalData();
+  const globalContact = contactSection?.content || {};
+
+  // Static fallback data - uses global contact as primary source
+  const staticContactInfo = [
+    {
+      icon: MapPin,
+      title: "Address",
+      content: globalContact.address?.full || "5 Duke St, Saint John, NB E2L 2B4",
+      link: `https://maps.google.com/?q=${encodeURIComponent(globalContact.address?.full || '5 Duke St, Saint John, NB E2L 2B4')}`,
+    },
+    {
+      icon: Phone,
+      title: "Phone",
+      content: globalContact.phone || "(506) 634-8906",
+      link: globalContact.phoneLink || "tel:+15066348906",
+    },
+    {
+      icon: Phone,
+      title: "Toll-Free",
+      content: globalContact.tollFree || "1(800) 561-2463",
+      link: globalContact.tollFree ? `tel:+1${globalContact.tollFree.replace(/[^0-9]/g, '')}` : "tel:+18005612463",
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      content: globalContact.email || "info@carelearning.ca",
+      link: getGmailLink(globalContact.email || "info@carelearning.ca"),
+    }
+  ];
+
+  const staticServiceAreas = globalContact.serviceAreas || [
+    "Saint John",
+    "Quispamsis",
+    "Rothesay",
+    "Grand Bay-Westfield",
+  ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,17 +114,9 @@ function Contact() {
     });
   };
 
-  // Map info section items to contact info format
-  const contactInfo = infoSection?.items?.map((item, index) => ({
-    icon: getIcon(item.icon),
-    title: item.label || staticContactInfo[index]?.title || '',
-    content: item.value || staticContactInfo[index]?.content || '',
-    // link: item.link || staticContactInfo[index]?.link || '#',
-    link:
-      item.label?.toLowerCase() === "email"
-        ? getGmailLink(item.value)
-        : item.link || staticContactInfo[index]?.link || "#",
-  })) || staticContactInfo;
+  // Info cards (Address, Phone, Toll-Free, Email) ALWAYS use Global Settings
+  // These are site-wide contact details managed in Global Settings admin
+  const contactInfo = staticContactInfo;
 
   // Map areas section items to service areas format
   const serviceAreas = areasSection?.items?.map(item =>
@@ -141,30 +132,62 @@ function Contact() {
     link: processLink(item.link, item.value),
   })) || [];
 
-  // Static fallback for quick contact
+  // Static fallback for quick contact - uses global contact settings
   const staticQuickContactItems = [
-    { icon: Phone, title: 'Call Us', subtitle: 'For immediate assistance', value: '(506) 634-8906', link: 'tel:+15066348906' },
-    { icon: Mail, title: 'Email Us', subtitle: 'For general inquiries', value: 'train@seniorwatch.com', link: getGmailLink('train@seniorwatch.com') },
-    { icon: MapPin, title: 'Visit Us', subtitle: 'At our office location', value: 'Get Directions', link: 'https://maps.google.com/?q=100+Prince+Edward+St+Saint+John+NB' }
+    {
+      icon: Phone,
+      title: 'Call Us',
+      subtitle: 'For immediate assistance',
+      value: globalContact.phone || '(506) 634-8906',
+      link: globalContact.phoneLink || 'tel:+15066348906'
+    },
+    {
+      icon: Mail,
+      title: 'Email Us',
+      subtitle: 'For general inquiries',
+      value: globalContact.email || 'info@carelearning.ca',
+      link: getGmailLink(globalContact.email || 'info@carelearning.ca')
+    },
+    {
+      icon: MapPin,
+      title: 'Visit Us',
+      subtitle: 'At our office location',
+      value: 'Get Directions',
+      link: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(globalContact.address?.full || '5 Duke St, Saint John, NB E2L 2B4')}`
+    }
   ];
-  const displayQuickContactItems = quickContactItems.length > 0 ? quickContactItems : staticQuickContactItems;
+  // Quick contact cards (Call Us, Email Us, Visit Us) ALWAYS use Global Settings
+  // These are site-wide contact details managed in Global Settings admin
+  const displayQuickContactItems = staticQuickContactItems;
 
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary to-primary-dark text-white overflow-hidden lg:min-h-[50vh] py-10 lg:py-24">
+
+      <section className="relative bg-gradient-to-br from-primary to-primary-dark text-white overflow-hidden lg:min-h-[50vh] lg:py-24">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-15"
           style={{ backgroundImage: heroSection?.images?.[0]?.url ? `url(${heroSection.images[0].url})` : `url(${contact})` }}
         ></div>
-        <div className="container-custom relative py-20 lg:py-32">
-          <div className="max-w-3xl">
+
+        <div className="container-custom relative py-10 lg:py-32">
+          <div className="max-w-3xl items-center py-10 lg:py-24">
             <AnimatedSection animation="fade-up">
+              <div className="inline-flex items-center gap-2 bg-secondary/20 text-secondary-light px-4 py-2 rounded-full mb-6">
+                <Mail size={16} />
+                <span className="text-sm font-medium">
+                  {heroSection?.badge?.text || heroSection?.subtitle || "We're Here to Help"}
+                </span>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-up" delay={100}>
               <h1 className="text-4xl lg:text-6xl font-bold mb-6">
                 {heroSection?.title || "Contact Us"}
               </h1>
             </AnimatedSection>
-            <AnimatedSection animation="fade-up" delay={150}>
+
+            <AnimatedSection animation="fade-up" delay={200}>
               <p className="text-xl text-gray-200 leading-relaxed">
                 {heroSection?.description || "We're here to help. Reach out to us for any questions about our training programs, enrollment, or career opportunities."}
               </p>
@@ -172,7 +195,6 @@ function Contact() {
           </div>
         </div>
       </section>
-
       {/* Contact Info Cards */}
       <section className="py-16 bg-white">
         <div className="container-custom">
@@ -338,7 +360,7 @@ function Contact() {
 
             {/* Map and Additional Info */}
             <AnimatedSection animation="fade-left">
-              <div className="bg-gray-200 rounded-2xl overflow-hidden mb-8 h-64">
+              <div className="bg-gray-200 rounded-2xl overflow-hidden mb-8 h-100">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2825.1234567890!2d-66.06!3d45.27!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDXCsDE2JzEyLjAiTiA2NsKwMDMnMzYuMCJX!5e0!3m2!1sen!2sca!4v1234567890"
                   width="100%"
@@ -372,7 +394,7 @@ function Contact() {
               </div>
 
               {/* Service Areas */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
+              {/* <div className="bg-white rounded-2xl p-8 shadow-lg">
                 <h3 className="text-xl font-semibold text-primary mb-4">
                   {areasSection?.title || "Serving Students From"}
                 </h3>
@@ -389,7 +411,7 @@ function Contact() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </AnimatedSection>
           </div>
         </div>
@@ -446,22 +468,22 @@ function Contact() {
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               {ctaSection?.description || "Whether you're interested in our PSW program, certification courses, or have questions about enrollment, we'd love to hear from you."}
             </p>
-            {ctaSection?.buttons?.[0] && (
+            {ctaSection?.buttons?.[0]?.text && (
               <a
-                href={ctaSection.buttons[0].link}
+                href={ctaSection.buttons[0].link || globalContact.phoneLink || "tel:+15066348906"}
                 className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-secondary px-8 py-4 rounded-full font-semibold transition-colors"
               >
                 <Phone size={20} />
                 {ctaSection.buttons[0].text}
               </a>
             )}
-            {(!ctaSection?.buttons?.[0] || ctaSection?.buttons?.[0]?.text === '') && (
+            {(!ctaSection?.buttons?.[0]?.text) && (
               <a
-                href="tel:+15066348906"
+                href={globalContact.phoneLink || "tel:+15066348906"}
                 className="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-secondary px-8 py-4 rounded-full font-semibold transition-colors"
               >
                 <Phone size={20} />
-                (506) 634-8906
+                {globalContact.phone || "(506) 634-8906"}
               </a>
             )}
           </AnimatedSection>

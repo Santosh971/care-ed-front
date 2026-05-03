@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin, Facebook, Linkedin, Instagram, Twitter, Youtube } from 'lucide-react'
 import logoLightStatic from '../assets/images/logo_light.png'
 import useGlobalData from '../hooks/useGlobalData'
-import { getGmailLink } from '../utils/email'
 
 // Icon mapping for social platforms
 const socialIconMap = {
@@ -13,59 +12,36 @@ const socialIconMap = {
   YouTube: Youtube
 }
 
-// Static fallback data
-const staticFooterData = {
-  companyInfo: {
-    name: 'Care-Ed Learning Center',
-    description: 'Professional healthcare education and training since 2007. Building careers through quality education.',
-    address: '100 Prince Edward St, Saint John, NB'
-  },
-  quickLinks: [
-    { label: 'Home', path: '/' },
-    { label: 'About Us', path: '/about' },
-    { label: 'Programs', path: '/care-ed' },
-    { label: 'Contact', path: '/contact' }
-  ],
-  programs: [
-    { label: 'PSW Program', path: '/care-ed' },
-    { label: 'CPR & First Aid', path: '/care-ed' },
-    { label: 'Foot Care Training', path: '/care-ed' }
-  ],
-  socialLinks: [
-    { platform: 'Facebook', url: '#' },
-    { platform: 'LinkedIn', url: '#' }
-  ],
-  contactInfo: {
-    phone: '(506) 634-8906',
-    email: 'info@carelearning.ca',
-    address: '100 Prince Edward St, Saint John, NB'
-  },
-  copyright: '© {year} Care-Ed Inc. All rights reserved.',
-  privacyLink: '/privacy',
-  termsLink: '/terms'
-}
-
 function Footer() {
-  const { footerSection, brandingSection, loading, fromApi } = useGlobalData()
-
-  // Get footer content with fallback
-  const footer = footerSection?.content || staticFooterData
+  const { footerSection, brandingSection, contactSection, loading, fromApi } = useGlobalData()
 
   // Get logo from branding section with fallback to static import
   const logoUrl = brandingSection?.content?.logoLight?.url || logoLightStatic
 
+  // Get footer content
+  const footer = footerSection?.content || {}
+
+  // Get contact info from dedicated contact section (single source of truth)
+  // Fall back to footer contactInfo for backward compatibility
+  const contact = contactSection?.content || footer.contactInfo || {}
+
   // Process copyright text to replace {year} with current year
-  const copyrightText = (footer.copyright || staticFooterData.copyright).replace('{year}', new Date().getFullYear())
+  const copyrightText = (footer.copyright || '© {year} Care-Ed Inc. All rights reserved.').replace('{year}', new Date().getFullYear())
 
   // Get social icon component
   const getSocialIcon = (platform) => socialIconMap[platform] || Facebook
 
   // Get data arrays with fallbacks
-  const quickLinks = footer.quickLinks || staticFooterData.quickLinks
-  const programs = footer.programs || staticFooterData.programs
-  const socialLinks = footer.socialLinks || staticFooterData.socialLinks
-  const contactInfo = footer.contactInfo || staticFooterData.contactInfo
-  const companyInfo = footer.companyInfo || staticFooterData.companyInfo
+  const quickLinks = footer.quickLinks || []
+  const programs = footer.programs || []
+  const socialLinks = footer.socialLinks || []
+  const companyInfo = footer.companyInfo || {}
+
+  // Contact info from dedicated section (single source of truth)
+  const phone = contact.phone || '(506) 634-8906'
+  const phoneLink = contact.phoneLink || 'tel:+15066348906'
+  const email = contact.email || 'info@carelearning.ca'
+  const address = contact.address?.full || contact.address?.street || '100 Prince Edward St, Saint John, NB'
 
   return (
     <footer className="bg-primary text-white py-10 md:mb-0">
@@ -78,7 +54,7 @@ function Footer() {
               <img src={logoUrl} alt="Care-ed Logo" className="w-32" />
             </div>
             <p className="text-gray-300 mb-4 text-sm leading-relaxed">
-              {companyInfo?.description || staticFooterData.companyInfo.description}
+              {companyInfo?.description || 'Professional healthcare education and training since 1987.'}
             </p>
             <div className="flex gap-2">
               {socialLinks.map((social, index) => {
@@ -133,43 +109,35 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact Info - uses global contact section */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin size={16} className="text-secondary-light mt-0.5 flex-shrink-0" />
                 <span className="text-gray-300 text-sm">
-                  {contactInfo?.address || staticFooterData.contactInfo.address}
+                  {address}
                 </span>
               </li>
               <li>
                 <a
-                  href={`tel:${contactInfo?.phone?.replace(/[^0-9+]/g, '') || '+15066348906'}`}
+                  href={phoneLink}
                   className="flex items-center gap-3 text-gray-300 hover:text-secondary-light transition-colors"
                 >
                   <Phone size={16} className="text-secondary-light flex-shrink-0" />
-                  <span className="text-sm">{contactInfo?.phone || staticFooterData.contactInfo.phone}</span>
+                  <span className="text-sm">{phone}</span>
                 </a>
               </li>
 
               <li>
                 <a
-                  href={
-                    (contactInfo?.email || staticFooterData.contactInfo.email)
-                      ? `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-                        contactInfo?.email || staticFooterData.contactInfo.email
-                      )}`
-                      : "#"
-                  }
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-gray-300 hover:text-secondary-light transition-colors"
                 >
                   <Mail size={16} className="text-secondary-light flex-shrink-0" />
-                  <span className="text-sm">
-                    {contactInfo?.email || staticFooterData.contactInfo.email}
-                  </span>
+                  <span className="text-sm">{email}</span>
                 </a>
               </li>
             </ul>
