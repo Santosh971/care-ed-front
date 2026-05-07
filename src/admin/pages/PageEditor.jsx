@@ -12,6 +12,7 @@ import SectionEditor, {
   ArrayEditor,
   ButtonEditor
 } from '../components/SectionEditor';
+import RichTextEditor from '../components/RichTextEditor';
 import { getStaticPageData } from '../../data/staticData';
 
 // Map page IDs to their display names and sections
@@ -83,7 +84,6 @@ const pageConfig = {
     name: 'Contact Page',
     sections: [
       { id: 'hero', name: 'Hero Section', icon: '🌟' },
-      // { id: 'info', name: 'Contact Information', icon: '📞' },
       { id: 'hours', name: 'Office Hours', icon: '🕐' },
       { id: 'areas', name: 'Service Areas', icon: '📍' },
       { id: 'quickContact', name: 'Quick Contact', icon: '⚡' },
@@ -93,8 +93,168 @@ const pageConfig = {
   global: {
     name: 'Global Settings',
     sections: [
-      // { id: 'navbar', name: 'Navigation', icon: '🧭' },
       { id: 'footer', name: 'Footer', icon: '📋' }
+    ]
+  },
+  // International Students Pages
+  'international-students': {
+    name: 'International Students Landing',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'cardsGrid', name: 'Resources Grid', icon: '📊' },
+      { id: 'supportCards', name: 'Support Cards', icon: '💬' },
+      { id: 'linkResources', name: 'Important Links', icon: '🔗' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-programs': {
+    name: 'Programs for International Students',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'cardsGrid', name: 'Programs Grid', icon: '📊' },
+      { id: 'richText', name: 'Program Benefits', icon: '📝' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-apply': {
+    name: 'How to Apply',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'timelineSteps', name: 'Application Steps', icon: '📅' },
+      { id: 'contactCard', name: 'Contact Info', icon: '📞' },
+      { id: 'faq', name: 'FAQ', icon: '❓' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-admission-requirements': {
+    name: 'Admission Requirements',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'policyTable', name: 'Requirements Table', icon: '📋' },
+      { id: 'richText', name: 'Document Requirements', icon: '📝' },
+      { id: 'faq', name: 'FAQ', icon: '❓' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-tuition-fees': {
+    name: 'Tuition, Fees & Refund Policy',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'policyTable', name: 'Tuition Fees', icon: '📋' },
+      { id: 'richText', name: 'Additional Costs', icon: '📝' },
+      { id: 'policyTable_2', name: 'Refund Policy', icon: '📋' },
+      { id: 'contactCard', name: 'Finance Contact', icon: '📞' }
+    ]
+  },
+  'is-language-requirements': {
+    name: 'Language Requirements',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'policyTable', name: 'English Tests', icon: '📋' },
+      { id: 'richText', name: 'Exemptions & Alternatives', icon: '📝' },
+      { id: 'faq', name: 'FAQ', icon: '❓' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-housing-support': {
+    name: 'Housing Support',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'cardsGrid', name: 'Accommodation Options', icon: '📊' },
+      { id: 'richText', name: 'Housing Resources', icon: '📝' },
+      { id: 'linkResources', name: 'Useful Links', icon: '🔗' },
+      { id: 'contactCard', name: 'Housing Contact', icon: '📞' }
+    ]
+  },
+  'is-health-support': {
+    name: 'Health Support',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'richText', name: 'Health Insurance', icon: '📝' },
+      { id: 'supportCards', name: 'Health Services', icon: '🏥' },
+      { id: 'faq', name: 'FAQ', icon: '❓' },
+      { id: 'contactCard', name: 'Health Contact', icon: '📞' }
+    ]
+  },
+  'is-mental-health': {
+    name: 'Mental Health & Crisis Support',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'supportCards', name: 'Crisis Resources', icon: '🏥' },
+      { id: 'richText', name: 'Counselling Services', icon: '📝' },
+      { id: 'linkResources', name: 'Mental Health Links', icon: '🔗' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-social-support': {
+    name: 'Social & Community Support',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'cardsGrid', name: 'Ways to Connect', icon: '📊' },
+      { id: 'richText', name: 'Community Resources', icon: '📝' },
+      { id: 'linkResources', name: 'Community Links', icon: '🔗' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-academic-support': {
+    name: 'Academic & Peer Support',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'cardsGrid', name: 'Academic Resources', icon: '📊' },
+      { id: 'richText', name: 'Tips for Success', icon: '📝' },
+      { id: 'contactCard', name: 'Academic Contact', icon: '📞' }
+    ]
+  },
+  'is-immigration': {
+    name: 'Immigration & Study Permit',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'timelineSteps', name: 'Study Permit Process', icon: '📅' },
+      { id: 'richText', name: 'Important Information', icon: '📝' },
+      { id: 'linkResources', name: 'Official Resources', icon: '🔗' },
+      { id: 'faq', name: 'FAQ', icon: '❓' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-student-rights': {
+    name: 'Student Rights & Responsibilities',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'richText', name: 'Your Rights', icon: '📝' },
+      { id: 'richText_2', name: 'Your Responsibilities', icon: '📝' },
+      { id: 'policyTable', name: 'Code of Conduct', icon: '📋' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-student-advisor': {
+    name: 'Student Advisor / Contact',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'contactCard', name: 'Advisor Contact', icon: '📞' },
+      { id: 'richText', name: 'How We Can Help', icon: '📝' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-important-links': {
+    name: 'Important Links',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'linkResources', name: 'Government Services', icon: '🔗' },
+      { id: 'linkResources_2', name: 'Local Resources', icon: '🔗' },
+      { id: 'linkResources_3', name: 'Health & Emergency', icon: '🔗' },
+      { id: 'linkResources_4', name: 'Community & Support', icon: '🔗' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
+    ]
+  },
+  'is-faq': {
+    name: 'FAQ',
+    sections: [
+      { id: 'hero', name: 'Hero Section', icon: '🌟' },
+      { id: 'faq', name: 'General Questions', icon: '❓' },
+      { id: 'faq_2', name: 'Visa & Immigration', icon: '❓' },
+      { id: 'faq_3', name: 'Life in Canada', icon: '❓' },
+      { id: 'faq_4', name: 'Academic Questions', icon: '❓' },
+      { id: 'bannerCTA', name: 'Banner CTA', icon: '🎯' }
     ]
   }
 };
@@ -116,10 +276,27 @@ const PageEditor = () => {
     }
   }, [config.sections, activeSection]);
 
+  // Preprocess section data before saving to ensure address is in correct format
+  const preprocessSectionData = (sectionId, data) => {
+    const processed = { ...data };
+
+    // Convert string address to object format for contactCard and hero sections
+    if ((sectionId === 'contactCard' || sectionId === 'hero') && typeof processed.address === 'string') {
+      const addressStr = processed.address;
+      processed.address = {
+        street: addressStr,
+        city: ''
+      };
+    }
+
+    return processed;
+  };
+
   const handleSave = async (sectionId, sectionData) => {
     setSaveStatus({ type: '', message: '' });
     try {
-      await updateSection(pageId, sectionId, sectionData);
+      const processedData = preprocessSectionData(sectionId, sectionData);
+      await updateSection(pageId, sectionId, processedData);
       setSaveStatus({ type: 'success', message: 'Section saved successfully!' });
       setTimeout(() => setSaveStatus({ type: '', message: '' }), 3000);
       refetch();
@@ -175,8 +352,8 @@ const PageEditor = () => {
               hint="Recommended size: 1920x1080px. Uploads to Cloudinary."
               folder="images"
             />
-            {/* Hide Trust Indicators for About, Care-Ed, and Contact page Hero sections */}
-            {!((pageId === 'home' || pageId === 'about' || pageId === 'care-ed' || pageId === 'contact' || pageId === 'careers') && sectionId === 'hero') && (
+            {/* Hide Trust Indicators for About, Care-Ed, Contact, Careers, and International Students pages */}
+            {!((pageId === 'home' || pageId === 'about' || pageId === 'care-ed' || pageId === 'contact' || pageId === 'careers' || pageId === 'international-students' || pageId.startsWith('is-')) && sectionId === 'hero') && (
               <div className="border-t pt-4">
                 <h4 className="font-medium mb-3">Trust Indicators</h4>
                 <p className="text-sm text-gray-500 mb-3">Display trust badges below the hero section</p>
@@ -206,7 +383,7 @@ const PageEditor = () => {
               </div>
             )}
             {/* Hide CTA Buttons for About, Care-Ed, and Contact page Hero sections */}
-            {!((pageId === 'about' || pageId === 'care-ed' || pageId === 'contact' || pageId === 'careers') && sectionId === 'hero') && (
+            {!((pageId === 'about' || pageId === 'care-ed' || pageId === 'contact' || pageId === 'careers' || pageId ==='is-apply' || pageId ==='is-tuition-fees' || pageId === 'is-language-requirements' || pageId === 'is-housing-support' || pageId ==='is-health-support' || pageId==='is-social-support' || pageId ==='is-academic-support' || pageId ==='is-student-rights' || pageId === 'is-student-advisor' || pageId === 'is-important-links' || pageId ==='is-faq') && sectionId === 'hero') && (
               <div className="border-t pt-4">
                 <h4 className="font-medium mb-3">CTA Buttons</h4>
                 <div className="space-y-3">
@@ -2399,6 +2576,686 @@ const PageEditor = () => {
           </div>
         );
 
+      // International Students Section Types
+      case 'faq':
+      case 'faq_2':
+      case 'faq_3':
+      case 'faq_4':
+        return (
+          <div className="space-y-6">
+            <TextInput
+              label="Section Title"
+              value={sectionData?.title}
+              onChange={(val) => onChange('title', val)}
+              placeholder="Frequently Asked Questions"
+            />
+            <TextInput
+              label="Section Subtitle"
+              value={sectionData?.subtitle}
+              onChange={(val) => onChange('subtitle', val)}
+              placeholder="Answers to common questions"
+            />
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">FAQ Items</h4>
+              <ArrayEditor
+                label="Questions"
+                items={sectionData?.items}
+                onChange={(val) => onChange('items', val)}
+                addItemLabel="Add Question"
+                defaultItem={{ question: '', answer: '' }}
+                renderItem={(item, onUpdate, index) => (
+                  <div className="space-y-3">
+                    <TextInput
+                      label="Question"
+                      value={item?.question}
+                      onChange={(val) => onUpdate({ ...item, question: val })}
+                      placeholder="What is your question?"
+                    />
+                    <TextArea
+                      label="Answer"
+                      value={item?.answer}
+                      onChange={(val) => onUpdate({ ...item, answer: val })}
+                      rows={3}
+                      placeholder="The answer to the question..."
+                    />
+                  </div>
+                )}
+              />
+            </div>
+            <Toggle
+              label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            />
+          </div>
+        );
+
+      case 'cardsGrid':
+        return (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <TextInput
+                label="Section Title"
+                value={sectionData?.title}
+                onChange={(val) => onChange('title', val)}
+                placeholder="Resources for International Students"
+              />
+              <TextInput
+                label="Section Subtitle"
+                value={sectionData?.subtitle}
+                onChange={(val) => onChange('subtitle', val)}
+                placeholder="Everything you need to know"
+              />
+            </div>
+            <Select
+              label="Grid Columns"
+              value={sectionData?.columns || '3'}
+              onChange={(val) => onChange('columns', val)}
+              options={[
+                { value: '2', label: '2 Columns' },
+                { value: '3', label: '3 Columns' },
+                { value: '4', label: '4 Columns' }
+              ]}
+            />
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">Cards</h4>
+              <ArrayEditor
+                label="Card Items"
+                items={sectionData?.items}
+                onChange={(val) => onChange('items', val)}
+                addItemLabel="Add Card"
+                defaultItem={{ icon: 'GraduationCap', title: 'New Card', description: '', link: '' }}
+                renderItem={(item, onUpdate, index) => (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <TextInput
+                        label="Title"
+                        value={item?.title}
+                        onChange={(val) => onUpdate({ ...item, title: val })}
+                        placeholder="Card Title"
+                      />
+                      <Select
+                        label="Icon"
+                        value={item?.icon}
+                        onChange={(val) => onUpdate({ ...item, icon: val })}
+                        options={[
+                          { value: 'GraduationCap', label: 'Graduation Cap' },
+                          { value: 'FileText', label: 'File Text' },
+                          { value: 'ClipboardCheck', label: 'Clipboard' },
+                          { value: 'DollarSign', label: 'Dollar' },
+                          { value: 'Languages', label: 'Languages' },
+                          { value: 'Home', label: 'Home' },
+                          { value: 'Heart', label: 'Heart' },
+                          { value: 'Brain', label: 'Brain' },
+                          { value: 'Users', label: 'Users' },
+                          { value: 'BookOpen', label: 'Book Open' },
+                          { value: 'Globe', label: 'Globe' },
+                          { value: 'Shield', label: 'Shield' },
+                          { value: 'HelpCircle', label: 'Help Circle' },
+                          { value: 'Phone', label: 'Phone' },
+                          { value: 'Activity', label: 'Activity' },
+                          { value: 'Award', label: 'Award' }
+                        ]}
+                      />
+                    </div>
+                    <TextArea
+                      label="Description"
+                      value={item?.description}
+                      onChange={(val) => onUpdate({ ...item, description: val })}
+                      rows={2}
+                      placeholder="Card description..."
+                    />
+                    <TextInput
+                      label="Link URL"
+                      value={item?.link}
+                      onChange={(val) => onUpdate({ ...item, link: val })}
+                      placeholder="/international-students/programs"
+                    />
+                  </div>
+                )}
+              />
+            </div>
+            <Toggle
+              label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            />
+          </div>
+        );
+
+      case 'timelineSteps':
+        return (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <TextInput
+                label="Section Title"
+                value={sectionData?.title}
+                onChange={(val) => onChange('title', val)}
+                placeholder="Application Steps"
+              />
+              <TextInput
+                label="Section Subtitle"
+                value={sectionData?.subtitle}
+                onChange={(val) => onChange('subtitle', val)}
+                placeholder="Follow these steps"
+              />
+            </div>
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">Steps</h4>
+              <ArrayEditor
+                label="Timeline Steps"
+                items={sectionData?.items}
+                onChange={(val) => onChange('items', val)}
+                addItemLabel="Add Step"
+                defaultItem={{ step: 1, title: 'New Step', description: '' }}
+                renderItem={(item, onUpdate, index) => (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      <TextInput
+                        label="Step Number"
+                        type="number"
+                        value={item?.step}
+                        onChange={(val) => onUpdate({ ...item, step: parseInt(val) || index + 1 })}
+                      />
+                      <TextInput
+                        label="Step Title"
+                        value={item?.title}
+                        onChange={(val) => onUpdate({ ...item, title: val })}
+                        placeholder="Submit Application"
+                        className="col-span-2"
+                      />
+                    </div>
+                    <TextArea
+                      label="Description"
+                      value={item?.description}
+                      onChange={(val) => onUpdate({ ...item, description: val })}
+                      rows={2}
+                      placeholder="Detailed description of this step..."
+                    />
+                  </div>
+                )}
+              />
+            </div>
+            <Toggle
+              label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            />
+          </div>
+        );
+
+      case 'policyTable':
+      case 'policyTable_2':
+        return (
+          <div className="space-y-6">
+            <TextInput
+              label="Section Title"
+              value={sectionData?.title}
+              onChange={(val) => onChange('title', val)}
+              placeholder="Requirements Table"
+            />
+            <TextInput
+              label="Section Subtitle"
+              value={sectionData?.subtitle}
+              onChange={(val) => onChange('subtitle', val)}
+              placeholder="Detailed requirements"
+            />
+            <TextArea
+              label="Description/Note"
+              value={sectionData?.description}
+              onChange={(val) => onChange('description', val)}
+              rows={2}
+              placeholder="Additional information about this table..."
+            />
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">Table Headers</h4>
+              <ArrayEditor
+                label="Headers"
+                items={sectionData?.headers}
+                onChange={(val) => onChange('headers', val)}
+                addItemLabel="Add Header"
+                defaultItem="Column Title"
+                renderItem={(item, onUpdate, index) => (
+                  <TextInput
+                    label={`Header ${index + 1}`}
+                    value={item}
+                    onChange={(val) => onUpdate(val)}
+                    placeholder="Requirement"
+                  />
+                )}
+              />
+            </div>
+            <div className="border-t pt-4">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-medium">Table Rows</h4>
+                <span className="text-sm text-gray-500">
+                  {(sectionData?.headers || []).length || 3} columns per row
+                </span>
+              </div>
+
+              {/* Rows List */}
+              <div className="space-y-3 mb-3">
+                {(sectionData?.rows || []).map((row, rowIndex) => {
+                  const headers = sectionData?.headers || [];
+                  const numColumns = headers.length || 3;
+                  const cells = Array.isArray(row) ? row : [];
+
+                  // Ensure row has correct number of cells
+                  const normalizedRow = [...cells];
+                  while (normalizedRow.length < numColumns) {
+                    normalizedRow.push('');
+                  }
+
+                  return (
+                    <div key={rowIndex} className="relative bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <div className="absolute top-2 right-2 flex gap-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newRows = [...(sectionData?.rows || [])];
+                            newRows.splice(rowIndex, 1);
+                            onChange('rows', newRows);
+                          }}
+                          className="w-6 h-6 bg-red-100 text-red-600 rounded flex items-center justify-center hover:bg-red-200 text-xs"
+                          title="Remove row"
+                        >
+                          ×
+                        </button>
+                      </div>
+                      <div className="mb-2">
+                        <span className="text-sm font-medium text-gray-700">Row {rowIndex + 1}</span>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {normalizedRow.slice(0, numColumns).map((cell, cellIndex) => (
+                          <div key={cellIndex} className="space-y-1">
+                            <label className="block text-xs text-gray-500">
+                              {headers[cellIndex] || `Column ${cellIndex + 1}`}
+                            </label>
+                            <input
+                              type="text"
+                              value={cell || ''}
+                              onChange={(e) => {
+                                const newRows = [...(sectionData?.rows || [])];
+                                const newRow = [...normalizedRow];
+                                newRow[cellIndex] = e.target.value;
+                                newRows[rowIndex] = newRow;
+                                onChange('rows', newRows);
+                              }}
+                              placeholder={headers[cellIndex] || `Cell ${cellIndex + 1}`}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary outline-none text-sm"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Add Row Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  const headers = sectionData?.headers || [];
+                  const numColumns = headers.length || 3;
+                  const newEmptyRow = Array(numColumns).fill('');
+                  onChange('rows', [...(sectionData?.rows || []), newEmptyRow]);
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+              >
+                + Add Row
+              </button>
+            </div>
+            <Toggle
+              label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            />
+          </div>
+        );
+
+      case 'supportCards':
+        return (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <TextInput
+                label="Section Title"
+                value={sectionData?.title}
+                onChange={(val) => onChange('title', val)}
+                placeholder="Support Services"
+              />
+              <TextInput
+                label="Section Subtitle"
+                value={sectionData?.subtitle}
+                onChange={(val) => onChange('subtitle', val)}
+                placeholder="We're here to support you"
+              />
+            </div>
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">Support Cards</h4>
+              <ArrayEditor
+                label="Cards"
+                items={sectionData?.items}
+                onChange={(val) => onChange('items', val)}
+                addItemLabel="Add Card"
+                defaultItem={{ icon: 'Heart', title: 'New Service', description: '', contactInfo: '' }}
+                renderItem={(item, onUpdate, index) => (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <TextInput
+                        label="Title"
+                        value={item?.title}
+                        onChange={(val) => onUpdate({ ...item, title: val })}
+                        placeholder="Health Services"
+                      />
+                      <Select
+                        label="Icon"
+                        value={item?.icon}
+                        onChange={(val) => onUpdate({ ...item, icon: val })}
+                        options={[
+                          { value: 'Heart', label: 'Heart' },
+                          { value: 'Brain', label: 'Brain' },
+                          { value: 'Users', label: 'Users' },
+                          { value: 'BookOpen', label: 'Book Open' },
+                          { value: 'Phone', label: 'Phone' },
+                          { value: 'MessageCircle', label: 'Message Circle' },
+                          { value: 'Hospital', label: 'Hospital' },
+                          { value: 'Stethoscope', label: 'Stethoscope' },
+                          { value: 'Pill', label: 'Pill' },
+                          { value: 'Globe', label: 'Globe' },
+                          { value: 'LifeBuoy', label: 'Life Buoy' }
+                        ]}
+                      />
+                    </div>
+                    <TextArea
+                      label="Description"
+                      value={item?.description}
+                      onChange={(val) => onUpdate({ ...item, description: val })}
+                      rows={2}
+                      placeholder="Description of the service..."
+                    />
+                    <TextInput
+                      label="Contact Info"
+                      value={item?.contactInfo}
+                      onChange={(val) => onUpdate({ ...item, contactInfo: val })}
+                      placeholder="(506) 634-8906"
+                    />
+                  </div>
+                )}
+              />
+            </div>
+            <Toggle
+              label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            />
+          </div>
+        );
+
+      case 'contactCard':
+        return (
+          <div className="space-y-6">
+            <TextInput
+              label="Section Title"
+              value={sectionData?.title}
+              onChange={(val) => onChange('title', val)}
+              placeholder="Contact Information"
+            />
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">Contact Details</h4>
+              <div className="space-y-4">
+                <TextInput
+                  label="Contact Name/Title"
+                  value={sectionData?.contactName}
+                  onChange={(val) => onChange('contactName', val)}
+                  placeholder="International Student Advisor"
+                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <TextInput
+                    label="Email"
+                    type="email"
+                    value={sectionData?.email}
+                    onChange={(val) => onChange('email', val)}
+                    placeholder="international@carelearning.ca"
+                  />
+                  <TextInput
+                    label="Phone"
+                    type="tel"
+                    value={sectionData?.phone}
+                    onChange={(val) => onChange('phone', val)}
+                    placeholder="+1 (506) 634-8906"
+                  />
+                </div>
+                <TextInput
+                  label="Toll-Free Number"
+                  value={sectionData?.tollFree}
+                  onChange={(val) => onChange('tollFree', val)}
+                  placeholder="1-800-561-2463"
+                />
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium text-gray-700">Address</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <TextInput
+                      label="Street Address"
+                      value={sectionData?.address?.street || ''}
+                      onChange={(val) => onChange('address', { ...sectionData?.address, street: val })}
+                      placeholder="100 Prince Edward St Unit #111"
+                    />
+                    <TextInput
+                      label="City & Province"
+                      value={sectionData?.address?.city || ''}
+                      onChange={(val) => onChange('address', { ...sectionData?.address, city: val })}
+                      placeholder="Saint John, NB E2L 4M5"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">Office Hours</h4>
+              <ArrayEditor
+                label="Hours"
+                items={sectionData?.hours}
+                onChange={(val) => onChange('hours', val)}
+                addItemLabel="Add Hours"
+                defaultItem={{ day: 'Monday - Friday', time: '9:00 AM - 5:00 PM (AST)' }}
+                renderItem={(item, onUpdate, index) => (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <TextInput
+                      label="Day(s)"
+                      value={item?.day}
+                      onChange={(val) => onUpdate({ ...item, day: val })}
+                      placeholder="Monday - Friday"
+                    />
+                    <TextInput
+                      label="Hours"
+                      value={item?.time}
+                      onChange={(val) => onUpdate({ ...item, time: val })}
+                      placeholder="9:00 AM - 5:00 PM"
+                    />
+                  </div>
+                )}
+              />
+            </div>
+            <TextInput
+              label="Map Embed URL"
+              value={sectionData?.mapEmbedUrl}
+              onChange={(val) => onChange('mapEmbedUrl', val)}
+              placeholder="https://www.google.com/maps/embed?..."
+              hint="Google Maps embed URL for location map"
+            />
+            <Toggle
+              label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            />
+          </div>
+        );
+
+      case 'linkResources':
+      case 'linkResources_2':
+      case 'linkResources_3':
+      case 'linkResources_4':
+        return (
+          <div className="space-y-6">
+            <TextInput
+              label="Section Title"
+              value={sectionData?.title}
+              onChange={(val) => onChange('title', val)}
+              placeholder="Important Links"
+            />
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">Resource Links</h4>
+              <ArrayEditor
+                label="Links"
+                items={sectionData?.items}
+                onChange={(val) => onChange('items', val)}
+                addItemLabel="Add Link"
+                defaultItem={{ title: 'New Link', description: '', url: '', category: 'General' }}
+                renderItem={(item, onUpdate, index) => (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <TextInput
+                        label="Title"
+                        value={item?.title}
+                        onChange={(val) => onUpdate({ ...item, title: val })}
+                        placeholder="IRCC Website"
+                      />
+                      <TextInput
+                        label="Category"
+                        value={item?.category}
+                        onChange={(val) => onUpdate({ ...item, category: val })}
+                        placeholder="Government"
+                        hint="Used to group links"
+                      />
+                    </div>
+                    <TextArea
+                      label="Description"
+                      value={item?.description}
+                      onChange={(val) => onUpdate({ ...item, description: val })}
+                      rows={2}
+                      placeholder="Official immigration information..."
+                    />
+                    <TextInput
+                      label="URL"
+                      value={item?.url}
+                      onChange={(val) => onUpdate({ ...item, url: val })}
+                      placeholder="https://www.canada.ca/..."
+                    />
+                  </div>
+                )}
+              />
+            </div>
+            <Toggle
+              label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            />
+          </div>
+        );
+
+      case 'bannerCTA':
+        return (
+          <div className="space-y-6">
+            <TextInput
+              label="Title"
+              value={sectionData?.title}
+              onChange={(val) => onChange('title', val)}
+              placeholder="Ready to Start Your Journey?"
+            />
+            <TextArea
+              label="Description"
+              value={sectionData?.description}
+              onChange={(val) => onChange('description', val)}
+              rows={2}
+              placeholder="Contact our international student advisor..."
+            />
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">CTA Buttons</h4>
+              <ArrayEditor
+                label="Buttons"
+                items={sectionData?.buttons}
+                onChange={(val) => onChange('buttons', val)}
+                addItemLabel="Add Button"
+                defaultItem={{ text: 'Contact Us', link: '/international-students/student-advisor', style: 'primary' }}
+                renderItem={(item, onUpdate, index) => (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      <TextInput
+                        label="Button Text"
+                        value={item?.text}
+                        onChange={(val) => onUpdate({ ...item, text: val })}
+                        placeholder="Contact Us"
+                      />
+                      <TextInput
+                        label="Link URL"
+                        value={item?.link}
+                        onChange={(val) => onUpdate({ ...item, link: val })}
+                        placeholder="/international-students/student-advisor"
+                      />
+                      <Select
+                        label="Style"
+                        value={item?.style || 'primary'}
+                        onChange={(val) => onUpdate({ ...item, style: val })}
+                        options={[
+                          { value: 'primary', label: 'Primary (Filled)' },
+                          { value: 'secondary', label: 'Secondary (Outline)' }
+                        ]}
+                      />
+                    </div>
+                  </div>
+                )}
+              />
+            </div>
+            <Toggle
+              label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            />
+          </div>
+        );
+
+      case 'richText':
+      case 'richText_2':
+        return (
+          <div className="space-y-6">
+            <TextInput
+              label="Section Title"
+              value={sectionData?.title}
+              onChange={(val) => onChange('title', val)}
+              placeholder="Program Benefits"
+            />
+            <TextArea
+              label="Section Subtitle"
+              value={sectionData?.subtitle}
+              onChange={(val) => onChange('subtitle', val)}
+              rows={2}
+              placeholder="Why choose our programs..."
+              hint="Optional subtitle displayed below the title"
+            />
+            <div className="border-t pt-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Content
+              </label>
+              <p className="text-sm text-gray-500 mb-3">
+                Use the editor below to add formatted content with headings, bullet points, and more.
+              </p>
+              <div className="min-w-0">
+                <RichTextEditor
+                  value={sectionData?.content || ''}
+                  onChange={(val) => onChange('content', val)}
+                  placeholder="Enter your content here. Use headings for sections, bullet points for lists..."
+                />
+              </div>
+            </div>
+            <Toggle
+              label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            />
+          </div>
+        );
+
       default:
         return (
           <div className="space-y-4">
@@ -2434,7 +3291,24 @@ const PageEditor = () => {
     );
   }
 
-  const currentSectionData = data?.sections?.[activeSection];
+  // Normalize section data - convert string address to object format
+  const normalizeSectionData = (sectionId, sectionData) => {
+    if (!sectionData) return sectionData;
+
+    const normalized = { ...sectionData };
+
+    // Convert string address to object format for backward compatibility
+    if ((sectionId === 'contactCard' || sectionId === 'hero') && typeof normalized.address === 'string') {
+      normalized.address = {
+        street: normalized.address,
+        city: ''
+      };
+    }
+
+    return normalized;
+  };
+
+  const currentSectionData = normalizeSectionData(activeSection, data?.sections?.[activeSection]);
 
   return (
     <div className="space-y-4 sm:space-y-6">

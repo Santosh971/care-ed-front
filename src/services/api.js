@@ -3,7 +3,7 @@ import axios from 'axios';
 // Create axios instance with base configuration
 const api = axios.create({
   // baseURL: import.meta.env.VITE_API_URL || 'https://node.carelearning.ca/api',
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://node.carelearning.ca/api',
 
   timeout: 30000,
   headers: {
@@ -75,7 +75,14 @@ export const pagesAPI = {
   deletePage: (pageId) => api.delete(`/pages/${pageId}`),
   toggleSection: (pageId, sectionId) => api.patch(`/pages/${pageId}/sections/${sectionId}/toggle`),
   reorderSections: (pageId, sectionOrder) => api.put(`/pages/${pageId}/reorder`, { sectionOrder }),
-  cleanupBlobUrls: () => api.post('/pages/cleanup-blobs')
+  cleanupBlobUrls: () => api.post('/pages/cleanup-blobs'),
+
+  // International Students API
+  getChildPages: (parentCategory) => api.get(`/pages/children/${parentCategory}`),
+  getPageBySlug: (slug) => api.get(`/pages/slug/${slug}`),
+  createChildPage: (data) => api.post('/pages/child', data),
+  updateChildPage: (pageId, data) => api.put(`/pages/child/${pageId}`, data),
+  getAdminPages: (params) => api.get('/pages/admin/list', { params })
 };
 
 // Media API
@@ -85,7 +92,7 @@ export const mediaAPI = {
     const token = localStorage.getItem('adminToken');
     return axios.post(
       // `${import.meta.env.VITE_API_URL || 'https://node.carelearning.ca/api'}/media/upload/image`,
-      `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/media/upload/image`,
+      `${import.meta.env.VITE_API_URL || 'https://node.carelearning.ca/api'}/media/upload/image`,
 
       formData,
       {
@@ -101,7 +108,7 @@ export const mediaAPI = {
     const token = localStorage.getItem('adminToken');
     return axios.post(
       // `${import.meta.env.VITE_API_URL || 'https://node.carelearning.ca/api'}/media/upload/icon`,
-      `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/media/upload/image`,
+      `${import.meta.env.VITE_API_URL || 'https://node.carelearning.ca/api'}/media/upload/image`,
 
       formData,
       {

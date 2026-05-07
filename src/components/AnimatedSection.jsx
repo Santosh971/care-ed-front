@@ -26,7 +26,13 @@ const AnimatedSection = ({
       observer.observe(currentRef);
     }
 
+    // Fallback: Make visible after a short timeout if observer doesn't fire
+    const timeoutId = setTimeout(() => {
+      setIsVisible(true);
+    }, 500);
+
     return () => {
+      clearTimeout(timeoutId);
       if (currentRef) {
         observer.unobserve(currentRef);
       }

@@ -818,6 +818,15 @@ export const globalStaticData = {
   }
 };
 
+// Import international students static data
+import {
+  internationalStudentsLandingData,
+  internationalStudentsChildPages,
+  getInternationalStudentPageData,
+  getAllInternationalStudentPages,
+  getInternationalStudentPageById
+} from './internationalStudentsStaticData.js';
+
 // Get static data by page ID
 export const getStaticPageData = (pageId) => {
   const pageData = {
@@ -827,10 +836,30 @@ export const getStaticPageData = (pageId) => {
     'care-ed': careEdStaticData,
     'careers': careersStaticData,
     'contact': contactStaticData,
-    'global': globalStaticData
+    'global': globalStaticData,
+    'international-students': internationalStudentsLandingData
   };
 
+  // Check if it's a child page of international-students
+  if (pageId && pageId.startsWith('is-')) {
+    const childPage = getInternationalStudentPageById(pageId);
+    if (childPage) return childPage;
+  }
+
   return pageData[pageId] || null;
+};
+
+// Get static data by slug (for international students child pages)
+export const getStaticPageDataBySlug = (slug) => {
+  if (slug === 'international-students') {
+    return internationalStudentsLandingData;
+  }
+  return getInternationalStudentPageData(slug);
+};
+
+// Get all international students pages for navigation
+export const getInternationalStudentsNavData = () => {
+  return getAllInternationalStudentPages();
 };
 
 // Export all static data
@@ -842,5 +871,9 @@ export default {
   careersStaticData,
   contactStaticData,
   globalStaticData,
-  getStaticPageData
+  internationalStudentsLandingData,
+  internationalStudentsChildPages,
+  getStaticPageData,
+  getStaticPageDataBySlug,
+  getInternationalStudentsNavData
 };

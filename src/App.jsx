@@ -15,6 +15,8 @@ import Careers from './pages/Careers'
 import CareerServiceDetail from './pages/CareerServiceDetail'
 import Contact from './pages/Contact'
 import { PrivacyPolicy, TermsOfService } from './pages/LegalPages'
+import InternationalStudents from './pages/InternationalStudents'
+import InternationalStudentDetail from './pages/InternationalStudentDetail'
 
 // Admin pages
 import AdminLogin from './admin/AdminLogin'
@@ -25,6 +27,7 @@ import ContactsPage from './admin/pages/ContactsPage'
 import MediaLibrary from './admin/pages/MediaLibrary'
 import GlobalSettings from './admin/pages/GlobalSettings'
 import LegalPageEditor from './admin/pages/LegalPageEditor'
+import InternationalStudentsManager from './admin/pages/InternationalStudentsManager'
 
 // Component to update favicon dynamically
 const FaviconUpdater = () => {
@@ -63,6 +66,8 @@ function App() {
             <Route path="careers" element={<Careers />} />
             <Route path="careers/services/:serviceId" element={<CareerServiceDetail />} />
             <Route path="contact" element={<Contact />} />
+            {/* <Route path="international-students" element={<InternationalStudents />} /> */}
+            <Route path="international-students/:slug" element={<InternationalStudentDetail />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="terms-of-service" element={<TermsOfService />} />
           </Route>
@@ -75,6 +80,7 @@ function App() {
             <Route index element={<AdminDashboard />} />
             <Route path="pages/:pageId" element={<PageEditor />} />
             <Route path="pages/legal/:pageType" element={<LegalPageEditor />} />
+            <Route path="international-students" element={<InternationalStudentsManager />} />
             <Route path="settings" element={<GlobalSettings />} />
             <Route path="media" element={<MediaLibrary />} />
             <Route path="contacts" element={<ContactsPage />} />

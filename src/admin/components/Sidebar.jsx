@@ -16,7 +16,8 @@ import {
   ChevronRight,
   Layout,
   Shield,
-  Scroll
+  Scroll,
+  Globe
 } from 'lucide-react';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -84,6 +85,23 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       label: 'Contact Page',
       icon: Mail,
       path: '/admin/pages/contact'
+    },
+    {
+      id: 'divider-intl',
+      label: 'INTERNATIONAL STUDENTS',
+      isDivider: true
+    },
+    // {
+    //   id: 'intl-landing',
+    //   label: 'Landing Page',
+    //   icon: Globe,
+    //   path: '/admin/pages/international-students'
+    // },
+    {
+      id: 'intl-pages',
+      label: 'Manage Pages',
+      icon: FileText,
+      path: '/admin/international-students'
     },
     {
       id: 'divider-legal',

@@ -150,7 +150,7 @@ function About() {
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={100}>
               <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-                About <span className="text-secondary-light">{heroSection?.title || "Care-Ed"}</span>
+               <span className="text-secondary-light">{heroSection?.title || "Care-Ed"}</span>
               </h1>
             </AnimatedSection>
             <AnimatedSection animation="fade-up" delay={200}>
