@@ -67,23 +67,7 @@ const InternationalStudentDetail = () => {
 
   return (
     <main>
-      {/* Breadcrumb - Hidden
-      <div className="bg-gray-50 py-4">
-        <div className="container mx-auto px-4">
-          <nav className="flex items-center gap-2 text-sm">
-            <Link to="/" className="text-gray-500 hover:text-secondary">
-              Home
-            </Link>
-            <span className="text-gray-400">/</span>
-            <Link to="/international-students" className="text-gray-500 hover:text-secondary">
-              International Students
-            </Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-primary font-medium">{pageTitle}</span>
-          </nav>
-        </div>
-      </div>
-      */}
+
 
       {/* Dynamic Sections */}
       {sectionsWithoutTrustIndicators.length > 0 ? (

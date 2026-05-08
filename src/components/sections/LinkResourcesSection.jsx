@@ -36,7 +36,7 @@ const LinkResourcesSection = ({ section }) => {
           {Object.entries(groupedItems).map(([category, categoryItems], categoryIndex) => (
             <AnimatedSection key={category} animation="fade-up" delay={categoryIndex * 100}>
               {Object.keys(groupedItems).length > 1 && (
-                <h3 className="text-lg font-semibold text-secondary mb-4 mt-8 first:mt-0">
+                <h3 className="text-lg font-semibold text-secondary mb-2 mt-8 first:mt-0">
                   {category}
                 </h3>
               )}
@@ -52,7 +52,7 @@ const LinkResourcesSection = ({ section }) => {
                     <LinkComponent
                       key={index}
                       {...linkProps}
-                      className="block bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all group"
+                      className="block bg-white rounded-lg p-4 mb-3 shadow-sm hover:shadow-md transition-all group"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
@@ -60,7 +60,7 @@ const LinkResourcesSection = ({ section }) => {
                             {item.title}
                           </h4>
                           {item.description && (
-                            <p className="text-sm text-gray-600 mt-1">
+                            <p className="text-sm text-gray-600 mt-0.5">
                               {item.description}
                             </p>
                           )}

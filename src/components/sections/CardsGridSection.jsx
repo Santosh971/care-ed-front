@@ -1,3 +1,7 @@
+
+
+
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AnimatedSection from '../AnimatedSection';
 import {
@@ -17,6 +21,146 @@ const iconMap = {
 };
 
 const getIcon = (iconName) => iconMap[iconName] || Award;
+
+const DESCRIPTION_CHAR_LIMIT = 100;
+
+const Card = ({ item, index }) => {
+  const [expanded, setExpanded] = useState(false);
+
+  const IconComponent = getIcon(item.icon);
+  const CardWrapper = item.link ? Link : 'div';
+  const cardProps = item.link ? { to: item.link } : {};
+
+  const isLong = item.description && item.description.length > DESCRIPTION_CHAR_LIMIT;
+  const displayText = isLong && !expanded
+    ? item.description.slice(0, DESCRIPTION_CHAR_LIMIT).trimEnd() + '...'
+    : item.description;
+
+  return (
+    <AnimatedSection animation="fade-up" delay={index * 100}>
+      <div
+        className={`
+          group relative flex flex-col
+          bg-gray-50 rounded-xl
+          border border-transparent
+          transition-all duration-300 ease-in-out
+          hover:bg-white
+          hover:border-secondary/30
+          hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]
+          hover:-translate-y-1
+          h-full min-h-[220px]
+        `}
+      >
+        <CardWrapper
+          {...cardProps}
+          className={`flex flex-col flex-1 p-6 ${item.link ? 'cursor-pointer' : ''}`}
+          onClick={item.link ? undefined : (e) => e.preventDefault()}
+        >
+          {/* Icon */}
+          <div
+            className="
+              inline-flex items-center justify-center
+              w-12 h-12 rounded-lg mb-4 flex-shrink-0
+              bg-secondary/15 text-secondary
+              transition-all duration-300 ease-in-out
+              group-hover:bg-secondary group-hover:text-white
+              group-hover:scale-110 group-hover:rounded-xl
+            "
+          >
+            <IconComponent size={24} />
+          </div>
+
+          {/* Title */}
+          <h3
+            className="
+              text-xl font-semibold text-primary mb-2 flex-shrink-0
+              transition-colors duration-300
+              group-hover:text-secondary
+            "
+          >
+            {item.title}
+          </h3>
+
+          {/* Description */}
+          {item.description && (
+            <div className="flex-1 flex flex-col justify-between">
+              <p
+                className="
+                  text-gray-600 text-sm leading-relaxed
+                  transition-colors duration-300
+                  group-hover:text-gray-700
+                "
+              >
+                {displayText}
+              </p>
+
+              {/* Read more / less toggle */}
+              {isLong && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setExpanded((prev) => !prev);
+                  }}
+                  className="
+                    mt-3 self-start
+                    text-secondary text-sm font-medium
+                    flex items-center gap-1
+                    hover:underline focus:outline-none
+                    transition-all duration-200
+                  "
+                >
+                  {expanded ? 'Show less' : 'Read more'}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14" height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className={`transition-transform duration-300 ${expanded ? 'rotate-180' : 'rotate-0'}`}
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Arrow — linked cards only */}
+          {item.link && (
+            <div
+              className="
+                mt-4 flex items-center gap-1 flex-shrink-0
+                text-secondary text-sm font-medium
+                opacity-0 -translate-x-2
+                transition-all duration-300
+                group-hover:opacity-100 group-hover:translate-x-0
+              "
+            >
+              Learn more
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16" height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          )}
+        </CardWrapper>
+      </div>
+    </AnimatedSection>
+  );
+};
 
 const CardsGridSection = ({ section }) => {
   if (!section || section.isActive === false) return null;
@@ -46,37 +190,10 @@ const CardsGridSection = ({ section }) => {
           )}
         </AnimatedSection>
 
-        <div className={`grid ${gridCols[columns] || gridCols[3]} gap-6`}>
-          {items.map((item, index) => {
-            const IconComponent = getIcon(item.icon);
-            const CardWrapper = item.link ? Link : 'div';
-            const cardProps = item.link ? { to: item.link } : {};
-
-            return (
-              <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
-                <CardWrapper
-                  {...cardProps}
-                  className={`block bg-gray-50 rounded-xl p-6 transition-all duration-300 ${
-                    item.link ? 'hover:bg-secondary/10 hover:shadow-lg cursor-pointer group' : ''
-                  }`}
-                >
-                  <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg mb-4 ${
-                    item.link ? 'bg-secondary/20 text-secondary group-hover:bg-secondary group-hover:text-white' : 'bg-secondary/20 text-secondary'
-                  } transition-colors`}>
-                    <IconComponent size={24} />
-                  </div>
-                  <h3 className="text-xl font-semibold text-primary mb-2">
-                    {item.title}
-                  </h3>
-                  {item.description && (
-                    <p className="text-gray-600">
-                      {item.description}
-                    </p>
-                  )}
-                </CardWrapper>
-              </AnimatedSection>
-            );
-          })}
+        <div className={`grid ${gridCols[columns] || gridCols[3]} gap-6 items-start`}>
+          {items.map((item, index) => (
+            <Card key={index} item={item} index={index} />
+          ))}
         </div>
       </div>
     </section>

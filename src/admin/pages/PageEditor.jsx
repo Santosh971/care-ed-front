@@ -85,7 +85,7 @@ const pageConfig = {
     sections: [
       { id: 'hero', name: 'Hero Section', icon: '🌟' },
       { id: 'hours', name: 'Office Hours', icon: '🕐' },
-      { id: 'areas', name: 'Service Areas', icon: '📍' },
+      // { id: 'areas', name: 'Service Areas', icon: '📍' },
       { id: 'quickContact', name: 'Quick Contact', icon: '⚡' },
       { id: 'cta', name: 'Call to Action', icon: '🎯' }
     ]
@@ -270,12 +270,17 @@ const PageEditor = () => {
   const config = pageConfig[pageId] || { name: pageId, sections: [] };
 
   // Set first section as active when data loads
+  // useEffect(() => {
+  //   if (config.sections.length > 0 && !activeSection) {
+  //     setActiveSection(config.sections[0].id);
+  //   }
+  // }, [config.sections, activeSection]);
+  // Reset active section when page changes
   useEffect(() => {
-    if (config.sections.length > 0 && !activeSection) {
+    if (config.sections.length > 0) {
       setActiveSection(config.sections[0].id);
     }
-  }, [config.sections, activeSection]);
-
+  }, [pageId]); // ← only depend on pageId
   // Preprocess section data before saving to ensure address is in correct format
   const preprocessSectionData = (sectionId, data) => {
     const processed = { ...data };
@@ -383,7 +388,7 @@ const PageEditor = () => {
               </div>
             )}
             {/* Hide CTA Buttons for About, Care-Ed, and Contact page Hero sections */}
-            {!((pageId === 'about' || pageId === 'care-ed' || pageId === 'contact' || pageId === 'careers' || pageId ==='is-apply' || pageId ==='is-tuition-fees' || pageId === 'is-language-requirements' || pageId === 'is-housing-support' || pageId ==='is-health-support' || pageId==='is-social-support' || pageId ==='is-academic-support' || pageId ==='is-student-rights' || pageId === 'is-student-advisor' || pageId === 'is-important-links' || pageId ==='is-faq') && sectionId === 'hero') && (
+            {!((pageId === 'about' || pageId === 'care-ed' || pageId === 'contact' || pageId === 'careers' || pageId === 'is-apply' || pageId === 'is-tuition-fees' || pageId === 'is-language-requirements' || pageId === 'is-housing-support' || pageId === 'is-health-support' || pageId === 'is-social-support' || pageId === 'is-academic-support' || pageId === 'is-student-rights' || pageId === 'is-student-advisor' || pageId === 'is-important-links' || pageId === 'is-faq') && sectionId === 'hero') && (
               <div className="border-t pt-4">
                 <h4 className="font-medium mb-3">CTA Buttons</h4>
                 <div className="space-y-3">
@@ -775,11 +780,18 @@ const PageEditor = () => {
                 </div>
               )}
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
             />
+
           </div>
         );
 
@@ -2622,8 +2634,15 @@ const PageEditor = () => {
                 )}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
             />
@@ -2715,11 +2734,18 @@ const PageEditor = () => {
                 )}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
             />
+
           </div>
         );
 
@@ -2776,11 +2802,18 @@ const PageEditor = () => {
                 )}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
             />
+
           </div>
         );
 
@@ -2906,8 +2939,14 @@ const PageEditor = () => {
                 + Add Row
               </button>
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
             />
@@ -2931,6 +2970,17 @@ const PageEditor = () => {
                 placeholder="We're here to support you"
               />
             </div>
+            <Select
+              label="Grid Columns"
+              value={sectionData?.columns || '2'}
+              onChange={(val) => onChange('columns', val)}
+              options={[
+                { value: '1', label: '1 Column' },
+                { value: '2', label: '2 Columns' },
+                { value: '3', label: '3 Columns' },
+                { value: '4', label: '4 Columns' }
+              ]}
+            />
             <div className="border-t pt-4">
               <h4 className="font-medium mb-3">Support Cards</h4>
               <ArrayEditor
@@ -2984,8 +3034,14 @@ const PageEditor = () => {
                 )}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
             />
@@ -3084,11 +3140,18 @@ const PageEditor = () => {
               placeholder="https://www.google.com/maps/embed?..."
               hint="Google Maps embed URL for location map"
             />
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
             />
+
           </div>
         );
 
@@ -3146,8 +3209,14 @@ const PageEditor = () => {
                 )}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
             />
@@ -3207,8 +3276,14 @@ const PageEditor = () => {
                 )}
               />
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
             />
@@ -3248,11 +3323,18 @@ const PageEditor = () => {
                 />
               </div>
             </div>
-            <Toggle
+            {/* <Toggle
               label="Active"
               checked={sectionData?.isActive !== false}
               onChange={(val) => onChange('isActive', val)}
+            /> */}
+
+            <Toggle
+              label={sectionData?.isActive !== false ? "Active" : "Inactive"}
+              checked={sectionData?.isActive !== false}
+              onChange={(val) => onChange('isActive', val)}
             />
+
           </div>
         );
 
